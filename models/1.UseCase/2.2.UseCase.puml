@@ -1,0 +1,32 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Creator - Manage Arkast List" {
+    actor Creator
+
+    rectangle System {
+
+        :Creator: --> (Create arkast)
+        :Creator: --> (Search arkast)
+        :Creator: --> (List arkasts)
+        :Creator: --> (Manage playlists)
+        (Search arkast) ..> (List arkasts) : << include >>
+        (Create arkast) <.. (Publy arkast) : << extend >>
+        (List arkasts) <.. (Hide arkast) : << extend >>
+        (List arkasts) <.. (Edit arkast) : << extend >>
+        (List arkasts) <.. (Publy arkast) : << extend >>
+        (List arkasts) <.. (Add to playslists) : << extend >>
+        (Manage playlists) <|-- (Create playslists)
+        (Manage playlists) <|-- (Edit playslists)
+        (Manage playlists) <|-- (Delete playslists)
+        (Manage playlists) <|-- (Remove Arkast)
+        (Create arkast) ..> UA : << include >>
+        package "Use Arkad" as UA {
+                
+        }
+    }
+}
+
+@enduml

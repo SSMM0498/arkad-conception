@@ -1,0 +1,25 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Viewer Creator- Watch Arkast" {
+    actor Viewer
+    ' actor Creator
+
+    rectangle System {
+        :Viewer: --> (Play Arkast)
+        :Viewer: --> (Change Volume)
+        :Viewer: --> (Change Arkast)
+        :Viewer: --> (Pause Arkast)
+        :Viewer: --> (Go Next/Previous Arkast)
+
+        (Pause Arkast) ..> UA : <<extend>>
+
+        package "Use Arkad" as UA {
+            
+        }
+    }
+}
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "us: Difference between watching as Creator and as Viewer" {
+    actor Viewer
+    actor Creator
+
+    package System {
+        :Viewer: --> (Watch arkast)
+        :Viewer: --> (Search arkast)
+        :Creator: --> (Log in)
+
+        (Search arkast) ..> (Watch arkast) : <<extend>>
+        (Log in) ..> (Evaluate arkast) : <<extend>>
+        (Log in) ..> (Manage Note) : <<extend>>
+        (Evaluate arkast) ..> (Watch arkast) : <<extend>>
+        (Evaluate arkast) <|-- (Rate arkast)
+        (Evaluate arkast) <|-- (Comment arkast)
+        (Manage Note) ..> (Watch arkast) : <<extend>>
+    }
+
+    Viewer <|-- Creator
+}
+
+@enduml

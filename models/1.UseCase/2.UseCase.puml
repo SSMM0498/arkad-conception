@@ -1,0 +1,45 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Creator Package" {
+    actor Creator
+
+    package System {
+        :Creator: --> AU
+        :Creator: --> IC
+        :Creator: --> MA
+        :Creator: --> CA
+
+        package "AUTHENTIFICATION" as AU {
+
+        }
+
+        package "Manage Creation" as CA {
+            package "Manage Arkast List" as MLA {
+                
+            }
+            package "Use Arkad" as UA {
+                
+            }
+
+            MLA ..> UA : << extend >>
+        }
+
+        package "Manage Account" as MA {
+
+        }
+
+        package "Interact Creator" as IC {
+
+        }
+
+        CA ..> AU : << include >>
+        MA ..> AU : << include >>
+        IC ..> AU : << include >>
+
+    }
+}
+
+@enduml

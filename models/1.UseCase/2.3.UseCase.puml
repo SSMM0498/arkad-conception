@@ -1,0 +1,34 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Creator - Use Arkad" {
+    actor Creator
+
+    rectangle System {
+        :Creator: --> (Use Editor)
+        :Creator: --> (Use Mini-Browser)
+        :Creator: --> (Manage file/folder)
+        :Creator: --> (Use Slide)
+
+        (Use Editor) <|-- (Type code)
+        (Use Editor) <|-- (Copy/Cut/Paste code)
+
+        (Use Mini-Browser) <|-- (Open/Close Browser)
+        (Use Mini-Browser) <|-- (Maximize/Minimize Browser)
+        (Use Mini-Browser) <|-- (Drag/Drop Browser)
+
+        (Manage file/folder) <|-- (Open file/folder)
+        (Manage file/folder) <|-- (Add file/folder)
+        (Manage file/folder) <|-- (Delete file/folder)
+        (Manage file/folder) <|-- (Rename file/folder)
+        (Manage file/folder) <|-- (Copy/Cut/Paste file/folder)
+        (Manage file/folder) <|-- (Drag/Drop file/folder)
+
+        (Use Slide) <|-- (Maximize/Minimize Slide)
+        (Use Slide) <|-- (Scroll Slides)
+    }
+}
+
+@enduml

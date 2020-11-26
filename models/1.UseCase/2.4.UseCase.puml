@@ -1,0 +1,14 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Creator - Manage Account" {
+    actor Creator
+
+    rectangle System {
+        :Creator: --> (Edit profile)
+        (Edit profile) <.. (Delete Account) : << extend >>
+    }
+}
+@enduml
