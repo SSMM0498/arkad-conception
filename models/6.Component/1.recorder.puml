@@ -1,0 +1,20 @@
+@startuml "recorder component diagram"
+skinparam shadowing false
+skinparam monochrome true
+
+frame "cp: Recorder" {
+    watchers - [Watcher]
+    mirror - [Utils]
+    nodeCaptor - [Captor]
+    typesCaptor - [Captor]
+    typesRecorder - [Recorder]
+    [Watcher] --( mirror
+    [Recorder] --( mirror
+    [Recorder] -down-( watchers
+    [Recorder] -up-( mutationBuffer
+    [Recorder] -right-( nodeCaptor
+    [Watcher] --( typesCaptor
+    [Watcher] -down-( typesRecorder
+    [Watcher] --( mutationBuffer
+}
+@enduml
