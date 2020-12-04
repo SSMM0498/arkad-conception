@@ -1,0 +1,61 @@
+@startuml "System Class Diagram"
+skinparam shadowing false
+skinparam monochrome true
+
+frame "cl: System Class Diagram" {
+    class user {
+        firstname
+        lastname
+        username
+        email
+        password
+        status
+        githubcount
+        googlecount
+    }
+
+    class studio {
+        userfolder
+    }
+
+    class arkast {
+        title
+        duration
+        likes
+        dislikes
+        payload
+    }
+
+    class comment {
+        content
+    }
+    ' abstract AbstractCollection
+    ' interface List
+    ' interface Collection
+
+    ' List <|-- AbstractList
+    ' Collection <|-- AbstractCollection
+
+    ' Collection <|- List
+    ' AbstractCollection <|- AbstractList
+    ' AbstractList <|-- ArrayList
+
+    ' class ArrayList {
+    '     Object[] elementData
+    '     size()
+    ' }
+
+    ' enum TimeUnit {
+    '     DAYS
+    '     HOURS
+    '     MINUTES
+    ' }
+    
+    ' Object <|-- ArrayList
+
+    ' Object : equals()
+    ' ArrayList : Object[] elementData
+    ' ArrayList : size()
+}
+
+@enduml
