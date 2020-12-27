@@ -1,61 +1,73 @@
 @startuml "System Class Diagram"
+left to right direction
 skinparam shadowing false
 skinparam monochrome true
 
 frame "cl: System Class Diagram" {
     class user {
-        firstname
-        lastname
-        username
-        email
-        password
-        status
-        githubcount
-        googlecount
+        firstname: STRING
+        lastname: STRING
+        username: STRING
+        bio: TEXT
+        email: EMAIL
+        password: HASH
+        status: STATUS
+        githubcount: STRING
+        googlecount: STRING
+        follow: LISTUSER
+        userfolder: STRING
+        created_at: DATE
+        modified_at: DATE
     }
 
-    class studio {
-        userfolder
+    enum status {
+        online
+        disconnected
     }
 
     class arkast {
-        title
-        duration
-        likes
-        dislikes
-        payload
+        title: STRING
+        duration: TIME
+        likes: NUMBER
+        dislikes: NUMBER
+        payload: JSON
+        published_at: DATE
+        modified_at: DATE
+    }
+
+    class note {
+        user: USER
+        arkast: ARKAST
+        title: STRING
+        pin_at: TIME
+        created_at: DATE
+        modified_at: DATE
+        payload: JSON
+    }
+
+    class arkastlist {
+        title: STRING
+        arkasts: LISTARKAST
+        published_at: DATE
+        modified_at: DATE
     }
 
     class comment {
-        content
+        user: USER
+        comments: LISTCOMMENT
+        content: TEXT
+        published_at: DATE
+        modified_at: DATE
     }
-    ' abstract AbstractCollection
-    ' interface List
-    ' interface Collection
 
-    ' List <|-- AbstractList
-    ' Collection <|-- AbstractCollection
-
-    ' Collection <|- List
-    ' AbstractCollection <|- AbstractList
-    ' AbstractList <|-- ArrayList
-
-    ' class ArrayList {
-    '     Object[] elementData
-    '     size()
-    ' }
-
-    ' enum TimeUnit {
-    '     DAYS
-    '     HOURS
-    '     MINUTES
-    ' }
-    
-    ' Object <|-- ArrayList
-
-    ' Object : equals()
-    ' ArrayList : Object[] elementData
-    ' ArrayList : size()
+    user -- user
+    arkastlist --* user
+    arkast o-- note
+    arkastlist o-- arkast
+    user o-- comment
+    arkast *-- comment
+    arkast --* user
+    user *-- note
 }
 
 @enduml
