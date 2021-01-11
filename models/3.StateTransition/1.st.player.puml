@@ -5,14 +5,14 @@ skinparam monochrome true
 ' frame "st: player state diagram" {
     [*] --> Init : play button pressed
     Init --> Play : player is ready
-    Use --> Play : play button pressed
+    Interact --> Play : play button pressed
     Pause --> Play : play button pressed
     Play --> Pause : pause button pressed
-    Pause --> Use : use arkador
-    Use --> Pause : cancel modification
+    Pause --> Interact : use arkador
+    Interact --> Pause : cancel modification
     Pause --> Exiting : quit player
     Play --> Exiting : quit player
-    Use --> Exiting : quit player
+    Interact --> Exiting : quit player
     state c <<choice>>
     Play --> c : arkast over
     c --> Init : [next arkast exist]
