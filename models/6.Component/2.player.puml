@@ -2,19 +2,12 @@
 skinparam shadowing false
 skinparam monochrome true
 
-frame "cp: Recorder" {
-    PlayerIn - [Watcher]
-    mirror - [Utils]
-    nodeCaptor - [Captor]
-    typesCaptor - [Captor]
-    typesRecorder - [Recorder]
-    ' [Watcher] --( mirror
-    ' [Recorder] --( mirror
-    ' [Recorder] -down-( watchers
-    ' [Recorder] -up-( mutationBuffer
-    ' [Recorder] -right-( nodeCaptor
-    ' [Watcher] --( typesCaptor
-    ' [Watcher] -down-( typesRecorder
-    ' [Watcher] --( mutationBuffer
+frame "cp: Player" {
+    [Player] -up- [PlayerDOM]
+    [PlayerDOM] -up- [NodeBuilder]
+    [Player] -left- [ActionScheduler]
+    [ActionScheduler] -left- [ActionTriggers]
+    [Player] -right- [PlayerMachineState]
+    [Player] -down- [PlayerElement]
 }
 @enduml
