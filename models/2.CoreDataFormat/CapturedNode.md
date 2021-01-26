@@ -38,7 +38,7 @@ getFormFieldsAttribute : return the input value for input, textarea and select, 
 getCanvasAttribute : return the dataUrl.
 getMediaAttribute : return the mediaState.
 
-#   Storing Example
+#   Return example
 ```json
 DocumentNodes =  {
     {
