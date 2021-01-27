@@ -104,7 +104,7 @@ Administrators manage the arkad plateform. They have access to all accounts and 
     +   Report Arkast
     +   Delete Arkast
 
-All the Include and Extends relationships can be understood from the diagram. As the diagram is large, It is divided into two parts. Hence, the Use Case Diagram of Online Video Database Management System is :
+All the Include and Extends relationships can be understood from the diagram. As the diagram is large, It is divided into 2 parts. Hence, the Use Case Diagram of Online Video Database Management System is :
 
 ##  Use Case Textual Description
 

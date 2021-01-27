@@ -36,7 +36,6 @@ The main function of the class is implemented in its capture method. The process
         +   Generate the node id
     +   Capture and format the child node
     +   Capture the document iframe
-
 ##   DATA STRUCTURE DESCRIPTION
 Capturing the DOM produces a specific type of data structures which are detailed in the following
 +   NodType : represents the type of the captured node and lets us know if it's a HTML Element or Text Node.
