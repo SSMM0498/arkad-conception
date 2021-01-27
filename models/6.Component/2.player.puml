@@ -1,4 +1,4 @@
-@startuml "recorder component diagram"
+@startuml "player component diagram"
 skinparam shadowing false
 skinparam monochrome true
 

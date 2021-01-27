@@ -1,44 +1,34 @@
-#   Data Formated
+##  DATA STRUCTURE DESCRIPTION
 ```typescript
-NodeType {
+enum NodeType {
     Element,
-    Text,
+    Text
 }
 
-Node = {
-    id: number,
-    ElementNode | textNode
-}
-
-ElementNode {
+type ElementNode = {
     type: NodeType.Element
-    ElementName: string
+    elementName: string
     attributes: attributes
-    childNodes: NodeShot[]
+    childNodes: NodeCaptured[]
 }
 
-textNode = {
+type TextNode = {
     type: NodeType.Text
     textContent: string
-    isStyle?: true
+    isCSSRules: boolean
+}
+
+type NodeCaptured = {
+    nodeId: number,
+    originId: number &
+    (ElementNode || TextNode)
+}
+
+interface NodeFormated extends Node {
+    _cnode: NodeCaptured
 }
 ```
-
-#   Class Required
-##  Main Class : Node Captor
-### Description
-Used for retrieve, reformat and save HTML Node in JSON format.
-### Methods
-captureNode : Parse the node and call the getAttribute method corresponding to this kind of node.
-formatNode  : Capture the node and Attribute ids (node id and root id).
-getGlobalAttribute : return the HTMLElement.attributes, scolling value, size (width - height).
-getExternalCSSAttribute : return the css rules and the absolute css path.
-getInternalCSSAttribute : return the css rules and the absolute css path.
-getFormFieldsAttribute : return the input value for input, textarea and select, the checked value for checkbox and radio, the selected value for option.
-getCanvasAttribute : return the dataUrl.
-getMediaAttribute : return the mediaState.
-
-#   Return example
+##  EXAMPLE
 ```json
 DocumentNodes =  {
     {
