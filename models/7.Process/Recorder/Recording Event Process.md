@@ -12,8 +12,7 @@ This class is important to :
         +   A button to toggle between the differents states of the recorder (start/pause/resume/stop) and thus enable user to handle the recording process.
         +   A button to activate or deactivate the microphone.
 +   Save the arkast as a file on server disk after pack down the JSON file of all events timeline and audio file in order to reduce size of output file.
-
-##  INITIALISATION OF THE CLASS
+##  INITIALISATION OF THE MAIN CLASS
 ### INITIALIZE THE NODE CAPTOR
 Create an instance of the node captor. This is class used for making instant capture of the whole DOM object in memory. The functionnement of the node captor class is detailed and explain [here](./Capturing%20Node%20Process.md)
 ### INITIALIZE THE MUTATION BUFFER
@@ -70,14 +69,13 @@ Call the watch method for each watchers classes. Click [here](Watchers.md) to le
 
 ### START LISTENING
 Call the listen method of the microphone listener class.
-
 ##  ADD NEW RECORDED EVENT
 This method is very usefull to save a capture event in the events time line. This is callback function of all watchers classses. It allows them to emit their recorded events. But particularities of these method are :
 +   To detect if an user event is occur while the MutationBuffer was freeze and so apply all DOM changes that have been buffering during paused state.
 +   Check if it is time to do a new full node capture. Indeed, a serie of full node captures is carried out recurrently according to a time interval. This mecanism is very important during the replay and allows us to provide similar functionality to video players, such as dragging and dropping to the progress bar to any point in time. Without it, if a user play the arkast in a specific point of the progress bar all the record event before this timestamp must be execute to ensure that the DOM is in the desired state (have all mutations applied) at that timestamp. This process is expensive in terms of performance. That's why by doing frequently a full node capture of the DOM we just need to retrive the near one before that timestamp and just perform a reduce number of actions done before that point.
-
 ##  PAUSE/RESUME RECORDING
-
+When
 ##  STOP RECORDING
-
+When
 ##  SAVE TO FILE
+When
