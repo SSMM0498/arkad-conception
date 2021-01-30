@@ -109,15 +109,21 @@ To sum up the emit method take a look of the state of buffer and reorganise it f
 
 ##   DATA STRUCTURE DESCRIPTION
 The buffering of mutation are done thanks to a large kind of data structure and also produces number which are :
-+   DoubleLinkedList : a typical double linked list class with methods :
++   DoubleLinkedList : is a typical double linked list data structure implemented in a class with the following methods :
     +   add a node
     +   remove a node
     +   retrieve a node with its position
+The class contains also 2 properties which are :
+    +   length of the list
+    +   head node of the list
 ```typescript
 class DoubleLinkedList { ... }
 ```
 
-+   DoubleLinkedListNode : 
++   DoubleLinkedListNode : reprents the node that our doubleLinkedList are composed. As with all double linked lists, it contains
+    +   previous attribute to refer to the preceding node
+    +   a next attribute for the node coming after
+    +   value of the current node.
 ```typescript
 type DoubleLinkedListNode = {
     previous: DoubleLinkedListNode | null;
@@ -126,14 +132,14 @@ type DoubleLinkedListNode = {
 }
 ```
 
-+   NodeInLinkedList :
++   NodeInLinkedList : represents the value of DoubleLinkedListNode. This is the classic node to which the `_ln` property is grafted to refer to its corresponding DoubleLinkedLiseNode.
 ```typescript
 type NodeInLinkedList = Node & {
     _ln: DoubleLinkedListNode;
 }
 ```
 
-+   textNodeNewValue :
++   textNodeNewValue : represents the format with which a MutationRecord of type `characterData` are stored in the buffer. We get the target node and the new text value (its textContent).
 ```typescript
 type textNodeNewValue = {
     node: Node
@@ -141,7 +147,7 @@ type textNodeNewValue = {
 }
 ```
 
-+   textMutation : 
++   textMutation : is a derivative of textNodeNewValue with which the MutationRecord is emitted as an event. Instead of getting the target node, we just take the nodeId and of course the new text value.
 ```typescript
 type textMutation = {
     id: number
@@ -149,7 +155,7 @@ type textMutation = {
 }
 ```
 
-+   attributeNewValue : 
++   attributeNewValue : represents the format with which a MutationRecord of type `attributes` are stored in the buffer. We get the target node and an array of edited attributes.
 ```typescript
 type attributeNewValue = {
     node: Node
@@ -157,7 +163,7 @@ type attributeNewValue = {
 }
 ```
 
-+   attributeMutation : 
++   attributeMutation : is a derivative of attributeNewValue with which the MutationRecord is emitted as an event. Instead of getting the target node, we just take the nodeId and of course the list of edited attributes.
 ```typescript
 type attributeMutation = {
     id: number
@@ -165,7 +171,7 @@ type attributeMutation = {
 }
 ```
 
-+   removedNodeMutation : 
++   removedNodeMutation : represents the format with which each removedNode in MutationRecord is buffered. We retrieve the id of the parent node and that of the node concerned.
 ```typescript
 export type removedNodeMutation = {
     parentId: number
@@ -173,7 +179,11 @@ export type removedNodeMutation = {
 }
 ```
 
-+   addedNodeMutation : 
++   addedNodeMutation : represents the format with which each addedNode in MutationRecord is buffered. We retrieve
++   id of the parent node
++   id of the next sibling node.
++   id of the previous sibling node.
++   concerned node as a NodeCaptured.
 ```typescript
 export type addedNodeMutation = {
     parentId: number
