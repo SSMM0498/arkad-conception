@@ -3,18 +3,27 @@ skinparam shadowing false
 skinparam monochrome true
 
 frame "cp: Recorder" {
-    watchers - [Watcher]
-    mirror - [Utils]
-    nodeCaptor - [Captor]
-    typesCaptor - [Captor]
-    typesRecorder - [Recorder]
-    [Watcher] --( mirror
-    [Recorder] --( mirror
-    [Recorder] -down-( watchers
-    [Recorder] -up-( mutationBuffer
-    [Recorder] -right-( nodeCaptor
-    [Watcher] --( typesCaptor
-    [Watcher] -down-( typesRecorder
-    [Watcher] --( mutationBuffer
+    [Recorder] <-down-> [Watchers]
+    [Recorder] <-right-> [Listener]
+    [Recorder] -up-> [NodeCaptor]
+    [Recorder] <-left-> [MutationBuffer]
+    [MutationBuffer] -down-> [NFMHandler]
+
+    note bottom of [NFMHandler]
+        NFM stand for
+        Node Formated Map
+    end note
+
+    ' watchers - [Watcher]
+    ' mirror - [Utils]
+    ' nodeCaptor - [Captor]
+    ' typesCaptor - [Captor]
+    ' typesRecorder - [Recorder]
+    ' [Watcher] --( mirror
+    ' [Recorder] --( mirror
+    ' [Recorder] -right-( nodeCaptor
+    ' [Watcher] --( typesCaptor
+    ' [Watcher] -down-( typesRecorder
+    ' [Watcher] --( mutationBuffer
 }
 @enduml
