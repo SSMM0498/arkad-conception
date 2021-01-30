@@ -60,20 +60,23 @@ We record a timestamp when each incremental snapshot is generated so that during
 All watchers have nearly the same process. A public method to start watching the corresponding events. For all, it is simply a single or multiple call of the needed event listenner function except for the MutationWatcher which use the MutationObserver WebAPI. The callback function of this event listenner will be the capture method of the class. They are method used for put the event in the good format and return it to the MainRecorder class.
 
 ##  DATA STRUCTURE DESCRITPTION
-
++   event
 ```typescript
-type fullCaptureEvent = {
-    type: EventType.FullCapture
-    data: {
-        node: NodeCaptured
-        initialOffset: {
-            top: number
-            left: number
-        }
-    }
+type event =
+    | fullCaptureEvent
+    | incrementalCaptureEvent
+    | metaEvent
+```
+
++   eventWithTime
+```typescript
+type eventWithTime = event & {
+    timestamp: number
+    delay?: number
 }
 ```
 
++   incrementalCaptureEvent
 ```typescript
 type incrementalCaptureEvent = {
     type: EventType.IncrementalCapture
@@ -81,6 +84,7 @@ type incrementalCaptureEvent = {
 }
 ```
 
++   metaEvent
 ```typescript
 type metaEvent = {
     type: EventType.Meta;
@@ -92,6 +96,7 @@ type metaEvent = {
 }
 ```
 
++   IncrementalSource
 ```typescript
 enum IncrementalSource {
     Mutation,
@@ -107,12 +112,14 @@ enum IncrementalSource {
 }
 ```
 
++   mutationData
 ```typescript
 type mutationData = {
     source: IncrementalSource.Mutation
 } & mutationCallbackParam
 ```
 
++   mousemoveData
 ```typescript
 type mousemoveData = {
     source: IncrementalSource.MouseMove | IncrementalSource.TouchMove
@@ -120,12 +127,14 @@ type mousemoveData = {
 }
 ```
 
++   mouseInteractionData
 ```typescript
 type mouseInteractionData = {
     source: IncrementalSource.MouseInteraction
 } & mouseInteractionParam
 ```
 
++   textSelectionData
 ```typescript
 type textSelectionData = {
     source: IncrementalSource.TextSelection,
@@ -133,18 +142,21 @@ type textSelectionData = {
 }
 ```
 
++   scrollData
 ```typescript
 type scrollData = {
     source: IncrementalSource.Scroll
 } & scrollPosition
 ```
 
++   viewportResizeData
 ```typescript
 type viewportResizeData = {
     source: IncrementalSource.ViewportResize
 } & viewportResizeDimension
 ```
 
++   inputData
 ```typescript
 type inputData = {
     source: IncrementalSource.Input
@@ -152,18 +164,21 @@ type inputData = {
 } & inputValue
 ```
 
++   mediaInteractionData
 ```typescript
 type mediaInteractionData = {
     source: IncrementalSource.MediaInteraction
 } & mediaInteractionParam
 ```
 
++   styleSheetRuleData
 ```typescript
 type styleSheetRuleData = {
     source: IncrementalSource.StyleSheetRule
 } & styleSheetRuleParam
 ```
 
++   incrementalData
 ```typescript
 type incrementalData =
     | mutationData
@@ -175,18 +190,4 @@ type incrementalData =
     | mediaInteractionData
     | styleSheetRuleData
     | textSelectionData
-```
-
-```typescript
-type event =
-    | fullCaptureEvent
-    | incrementalCaptureEvent
-    | metaEvent
-```
-
-```typescript
-type eventWithTime = event & {
-    timestamp: number
-    delay?: number
-}
 ```
