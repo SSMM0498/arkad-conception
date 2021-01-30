@@ -108,7 +108,7 @@ To sum up the emit method take a look of the state of buffer and reorganise it f
 +   any attributes mutations for fresh created node
 
 ##   DATA STRUCTURE DESCRIPTION
-The buffering of mutation are done thanks to a large kind of data structure which are :
+The buffering of mutation are done thanks to a large kind of data structure and also produces number which are :
 +   DoubleLinkedList : a typical double linked list class with methods :
     +   add a node
     +   remove a node
@@ -162,5 +162,23 @@ type attributeNewValue = {
 type attributeMutation = {
     id: number
     attributes: { [key: string]: string | null }
+}
+```
+
++   removedNodeMutation : 
+```typescript
+export type removedNodeMutation = {
+    parentId: number
+    id: number
+}
+```
+
++   addedNodeMutation : 
+```typescript
+export type addedNodeMutation = {
+    parentId: number
+    previousId?: number | null
+    nextId: number | null
+    node: NodeCaptured
 }
 ```
