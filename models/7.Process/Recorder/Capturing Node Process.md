@@ -12,7 +12,6 @@ Concerning the CSS Style i's a priority to studies the case of `:hover` selector
 The specific method includes two parts:
 1. When collecting CSS Rules in a CSS stylesheet we traverse it and add the CSS rules for the `:hover` selector just like in the original, but considering the selector as a `.:hover` class.
 2. When playing back the mouse up mouse interaction event, add the `.:hover` class name to the event target and all its ancestors, and remove it when the mouse moves away again.
-
 ##   MAIN FUNCTION PROCESS
 The main function of the class is implemented in its capture method. The process of this method is the following :
 +   For each node
