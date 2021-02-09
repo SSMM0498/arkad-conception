@@ -14,8 +14,9 @@ From now a good question is where all this actions will be perform. We can simpl
 
 In another hand we need to provide enabling an interactive mode during the pause state. The implementation of this essential functionnality is performed ...
 
-##  COMPONENT ARCHITECTURE
+##  ARCHITECTURE
 
+![PlayerArchiture](../../../out/models/6.Component/2.player/player%20component%20diagram.png)
 
 ##  INITIALISATION OF THE MAIN CLASS
 ### RETRIEVE THE RECORDED EVENTS AND AUDIO
@@ -52,4 +53,12 @@ When
 ##  STOP PLAYING
 When
 ##  WHY NOT A LIVE MODE
-When
+If you want to replay the events in a real-time way, you can use the live mode API. This API is also useful for some real-time collaboration usage and enable a number of terminal to receive event send by a recording terminal instantly. This approach causes a lot of changes in the way the recorder works as well as the player. However we just need to answer to the following question :
++   Where should the recorder send the recorded events and the sound stream ?
++   How does it send this ?
++   Where should the player listen to receive the events and the sound ?
++   How will it synchronize the sound and the event being played ?
+
+These are the only issues we need to fix as these are the only steps that will change in the recorder and player process.
+
+Obviously we need both in the recorder and in the player an attribute to know which mode it is in. However in the player the attribute will be associate with a live state in the player state machine. We also need a liveMode server and client respectively for the recorder to emit event and a client to receive it. 

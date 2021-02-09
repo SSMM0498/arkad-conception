@@ -16,12 +16,15 @@ frame "cp: Player" {
         [PlayerDOM] -up- [NodeBuilder]
         [PlayerDOM] -up- [NodeFormatedHandler]
     }
+
     package "Player Interface" {
         [PlayerInterface] -down- [PlayerController]
+        [PlayerInterface] -right- [PlayerScreen]
         [PlayerController] -down- [PlayerProgressBar]
         [PlayerController] -down- [PlayButton]
         [PlayerController] -down- [VolumeHandler]
     }
+    
     [Player] <-down- [PlayerInterface]
 }
 @enduml

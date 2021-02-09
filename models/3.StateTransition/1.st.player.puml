@@ -3,7 +3,7 @@ skinparam shadowing false
 skinparam monochrome true
 
 ' frame "st: player state diagram" {
-    [*] --> Init : play button pressed
+    [*] --> Init : arkast clicked
     Init --> Play : player is ready
     Interact --> Play : play button pressed
     Pause --> Play : play button pressed
