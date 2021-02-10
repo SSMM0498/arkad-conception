@@ -1,26 +1,27 @@
-- [Introduction](#introduction)
-  - [Contextualization](#contextualization)
-  - [Presentation](#presentation)
+- [INTRODUCTION](#introduction)
+  - [CONTEXTUALIZATION](#contextualization)
+  - [PRESENTATION](#presentation)
 - [CONCEPTION](#conception)
-  - [Lexique](#lexique)
-  - [Actors](#actors)
-    - [Viewer](#viewer)
-    - [Creator](#creator)
-    - [Administrator](#administrator)
-  - [Use Cases](#use-cases)
-  - [Use Case Textual Description](#use-case-textual-description)
-    - [Register](#register)
-    - [Register with Google/Github](#register-with-googlegithub)
-    - [Log in](#log-in)
-    - [Sign out](#sign-out)
-    - [Search Arkast](#search-arkast)
-    - [Use Arkador](#use-arkador)
-- [User Interface](#user-interface)
+  - [LEXIQUE](#lexique)
+  - [ACTORS](#actors)
+    - [VIEWER](#viewer)
+    - [CREATOR](#creator)
+    - [ADMINISTRATOR](#administrator)
+  - [USE CASES](#use-cases)
+  - [USE CASE TEXTUAL DESCRIPTION](#use-case-textual-description)
+    - [REGISTER](#register)
+    - [REGISTER WITH GOOGLE/GITHUB](#register-with-googlegithub)
+    - [LOG IN](#log-in)
+    - [SIGN OUT](#sign-out)
+    - [SEARCH ARKAST](#search-arkast)
+    - [USE ARKADOR](#use-arkador)
+- [ARCHITECTURE](#architecture)
+- [USER INTERFACE](#user-interface)
 
 
-#   Introduction
+#   INTRODUCTION
 
-##  Contextualization
+##  CONTEXTUALIZATION
 To learn the code, people have a lot of possibilities. Some of these solutions are chargeable and others are free. But platforms also use different methods for teaching.Those methods allow users to:
 + Watch videos that are recorded while the teacher codes and explains; like many youtube channels or udemy teacher do,
 + Read a bit, type the code directly into the browser, and immediately see the results like Codecademy and freeCodeCamp do,
@@ -29,12 +30,12 @@ To learn the code, people have a lot of possibilities. Some of these solutions a
 It can be seen that some of these methods try to focus on practice because coding is above all a practical activity. However, this type of platform often does not use video for its lessons. But learning with video tutorials is very effective, the teacher can explain the whole coding process. However the big problem with video is that it destroys all possibilities for interactivity and don't ease praticing. The code you watch is inert, you can neither copy, edit or run the code. All you can do is watch it and often for practising you are bound to go back and forth between your text editor and the video. It is very tedious and a little boring. Especially as interactivity during teaching between teacher and students is fully possible in online learning, but not with this old-fashioned video format. In addition what would have taken you five minutes to explain in-person, can often take an hour to explain online because the creation process for those videos are tedious and frustrating for teacher.
 That's why our platform is created to combine these 2 things. We used a different video format created for learning while practising. This one allows users to interact with the code directly in the player and make the learning experience more efficient.
 
-##  Presentation
+##  PRESENTATION
 The plateform is named arkad. This name is use to reference of the gaming world because his purpose is to offer a fun and easy way to learn coding. The simplicity is that you just have to go to the plateform, click RECORD and start talking while you code. The core of the plateform is our recorder and replayer program. With this one we store exactly all actions you did when you recorded your video and replay it for the viewer which can pause it at any time copy, edit or run the code if they want. Thereby users can share their coding skills, tips easely and learn from others in a better way. We name this kind of video arkast which is a merge between arkad and screencast.
 
 #   CONCEPTION
 
-##  Lexique
+##  LEXIQUE
 1.  Arkad
 2.  Arkador
 3.  Arkast
@@ -47,17 +48,17 @@ The plateform is named arkad. This name is use to reference of the gaming world 
 10. Player
 11. Tag word
 
-##  Actors
-### Viewer 
+##  ACTORS
+### VIEWER 
 Viewers are an unregister users. They can list and watch arkasts but can't comment it, take notes... They are not able to create a arkast or follow an creator. They must register to unlock all this features.
 
-### Creator
+### CREATOR
 Creators can perform all viewer's actions and can additionnaly use the arkad recorder to create an arkast and publy it. They can also comment an arkast and take notes and interact with other creator.
 
-### Administrator
+### ADMINISTRATOR
 Administrators manage the arkad plateform. They have access to all accounts and arkasts and can delete them at any time. They can send a message to the creator. All the advertising system are managed by them. They can modify the layouts, texts, images of the platform.
 
-##  Use Cases
+##  USE CASES
 +   Register : User creates a new account.
     +   With Google
     +   With Github
@@ -106,9 +107,9 @@ Administrators manage the arkad plateform. They have access to all accounts and 
 
 All the Include and Extends relationships can be understood from the diagram. As the diagram is large, It is divided into 2 parts. Hence, the Use Case Diagram of Online Video Database Management System is :
 
-##  Use Case Textual Description
+##  USE CASE TEXTUAL DESCRIPTION
 
-### Register
+### REGISTER
 
 | Name | Register to the plateform |
 |:--|--:|
@@ -146,7 +147,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | Unresolved issues |
 |  |
 
-### Register with Google/Github
+### REGISTER WITH GOOGLE/GITHUB
 
 | Name | Register to the plateform |
 |:--|--:|
@@ -175,7 +176,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | Unresolved issues |
 |  |
 
-### Log in
+### LOG IN
 
 | Name | Log in to the plateform |
 |:--|--:|
@@ -205,7 +206,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | Unresolved issues |
 |  |
 
-### Sign out
+### SIGN OUT
 
 | Name | Sign out from the platform |
 |:--|--:|
@@ -230,7 +231,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | Unresolved issues |
 |  |
 
-### Search Arkast
+### SEARCH ARKAST
 
 | Name | Search for an arkast |
 |:--|--:|
@@ -257,7 +258,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | Unresolved issues |
 |  |
 
-### Use Arkador
+### USE ARKADOR
 
 | Name | Use Arkador |
 |:--|--:|
@@ -287,7 +288,8 @@ All the Include and Extends relationships can be understood from the diagram. As
 
 
 
-#   User Interface
+#   ARCHITECTURE
+#   USER INTERFACE
 
 1.  Login Page
     Users can enter User Id and Password to login or can create a new account.
