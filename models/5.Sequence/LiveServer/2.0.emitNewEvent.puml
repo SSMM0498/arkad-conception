@@ -1,0 +1,37 @@
+@startuml "transfer event sequence diagram"
+skinparam shadowing false
+skinparam monochrome true
+skinparam ParticipantPadding 5
+skinparam BoxPadding 5
+autoactivate on
+autonumber
+activate Recorder
+
+box "Live Server"
+    participant Recorder
+    participant Buffer_S
+    participant Emitter_S
+end box
+
+box "Live Client"
+    participant Emitter_C
+    participant Buffer_C
+    participant Player
+end box
+
+Recorder ->  Buffer_S : New Event
+Buffer_S ->  Buffer_S : Bufferize the event
+deactivate Buffer_S
+Buffer_S -> Emitter_S : Order the transmission
+Emitter_S -> Emitter_C : Transfer the event
+Emitter_C -> Buffer_C : Save the event
+Buffer_C ->  Buffer_C : Insert the event
+deactivate Buffer_C
+alt missing events not yet retrieved > 1
+    Buffer_C ->  Emitter_C : Ask to resend missing event
+    deactivate Emitter_C
+    Emitter_C -> Emitter_S : Ask to resend missing event
+end
+Buffer_C -> Player : Trigger the action
+
+@enduml
