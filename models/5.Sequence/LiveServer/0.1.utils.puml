@@ -1,0 +1,18 @@
+@startuml "Handle exceeding timeout sequence diagram"
+skinparam shadowing false
+skinparam monochrome true
+autonumber
+
+activate Source
+Source ->  Target: Waiting for confirmation message
+activate Target
+?<-- Target : Sending error
+deactivate Target
+Source ->  Source: Abort waiting
+activate Source
+deactivate Source
+Source -> Target: Notification of aborting
+activate Target
+deactivate Target
+deactivate Source
+@enduml
