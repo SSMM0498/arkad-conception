@@ -47,7 +47,7 @@ type metaEvent = {
 }
 ```
 
-Take care that no DOM modification occur during full node capture to avoid some incoherence. To do that we freeze the mutationBuffer before calling the capture method of the nodeCaptor. After that the full capture is saved as an event in array and unfreeze the mutationBuffer. Take a look of the [mutationBuffer](Mutation%20Watcher%20Buffer.md) doc for more understanding that. The full capture return the following data structure :
+Take care that no DOM modification occur during full node capture to avoid some incoherence. To do that we freeze the mutationBuffer before calling the capture method of the NodeEncoder. After that the full capture is saved as an event in array and unfreeze the mutationBuffer. Take a look of the [mutationBuffer](Mutation%20Watcher%20Buffer.md) doc for more understanding that. The full capture return the following data structure :
 +   fullCaptureEvent : contains the payload (data) of a full capture event with :
     +   NodeCaptured is the current capture of all element in the page.
     +   initialOffset is scroll position of document.

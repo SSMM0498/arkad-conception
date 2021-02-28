@@ -5,8 +5,8 @@ skinparam monochrome true
 frame "cp: Recorder" {
     [Recorder] <-down-> [Watchers]
     [Recorder] <-right-> [Listener]
-    [Recorder] -up-> [NodeCaptor]
+    [Recorder] -up-> [NodeEncoder]
     [Recorder] <-left-> [MutationBuffer]
-    [MutationBuffer] -down-> [NFMHandler]
+    [MutationBuffer] -up-> [NFMHandler]
 }
 @enduml

@@ -19,4 +19,4 @@ The main function of the class is implemented in its build method. The process o
     +   Build their childNodes
     +   Build the iframe DOM if the originId correspond to an iframe
 ##   DATA STRUCTURE DESCRIPTION
-This class simply import and use the type create with the NodeCaptor. Click [here](../Recorder/Capturing%20Node%20Process.md) to read more about this data structure.
+This class simply import and use the type create with the NodeEncoder. Click [here](../Recorder/Capturing%20Node%20Process.md) to read more about this data structure.
