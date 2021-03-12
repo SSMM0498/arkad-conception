@@ -1,0 +1,33 @@
+@startuml "files handler component diagram"
+skinparam shadowing false
+skinparam monochrome true
+
+frame "cp: files handler" {
+    rectangle "Client Side"{
+        [Compressor]
+        [Uploader]
+        [Downloader]
+        package "recorder" {
+            [Recorder]
+        }
+        package player {
+            [Player]
+        }
+
+        [Recorder] -up-> [Uploader]
+        [Player] <-up-> [Downloader]
+    }
+    rectangle "Server Side"{
+        [FileHandler]
+    }
+
+    [Uploader] <-right-> [Compressor]
+    [Downloader] <-left-> [Compressor]
+    [Uploader] -up-> [FileHandler]
+    [Downloader] <-up-> [FileHandler]
+
+}
+
+@enduml
+
+active records cast
