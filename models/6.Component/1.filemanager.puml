@@ -29,5 +29,3 @@ frame "cp: files handler" {
 }
 
 @enduml
-
-active records cast

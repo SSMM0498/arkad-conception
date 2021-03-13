@@ -1,73 +1,144 @@
 @startuml "System Class Diagram"
-left to right direction
 skinparam shadowing false
 skinparam monochrome true
 
 frame "cl: System Class Diagram" {
     class user {
-        firstname: STRING
-        lastname: STRING
+        id: NUMBER
+
         username: STRING
-        bio: TEXT
         email: EMAIL
         password: HASH
-        status: STATUS
+
+        firstname: STRING
+        lastname: STRING
+        bio: TEXT
+        
         githubcount: STRING
         googlecount: STRING
+        
+        status: online | disconnected
         follow: LISTUSER
-        userfolder: STRING
+        workspacehash: STRING
+        
         created_at: DATE
         modified_at: DATE
     }
 
-    enum status {
-        online
-        disconnected
-    }
 
     class arkast {
+        id: NUMBER
         title: STRING
+        description: TEXT
         duration: TIME
         likes: NUMBER
-        dislikes: NUMBER
-        payload: JSON
+        views: NUMBER
         published_at: DATE
         modified_at: DATE
     }
+    
+    class livekast {
+        id: NUMBER
+        from: NUMBER
+        scheduledFor: DATE
+    }
 
-    class note {
-        user: USER
-        arkast: ARKAST
+    class arkast_file {
+        id: NUMBER
+        events: JSON
+        env_data: JSON
+        audio: TEXT
+    }
+    
+    class creating_infos {
+        id: NUMBER
+        idUser: NUMBER
+        idArkast: NUMBER
+        created_at: TIME
+    }
+    
+    class reading_infos {
+        id: NUMBER
+        idUser: NUMBER
+        idArkast: NUMBER
+        like: BOOLEAN
+        resume_time: TIME
+    }
+    
+    class talking_infos {
+        id: NUMBER
+        idUser: NUMBER
+        idLivekast: NUMBER
+        message: TEXT
+        timestamp: TIME
+    }
+
+    class interaction_point {
+        id: NUMBER
+        idArkast: NUMBER
         title: STRING
         pin_at: TIME
         created_at: DATE
         modified_at: DATE
         payload: JSON
     }
-
+    
+    class comment {
+        id: NUMBER
+        nestedIn: NUMBER
+        form: NUMBER
+        content: TEXT
+        published_at: DATE
+    }
+    
     class arkastlist {
+        id: NUMBER
+        idUser: NUMBER
         title: STRING
         arkasts: LISTARKAST
         published_at: DATE
         modified_at: DATE
     }
 
-    class comment {
-        user: USER
-        comments: LISTCOMMENT
-        content: TEXT
-        published_at: DATE
+    class adding_infos {
+        id: NUMBER
+        index: NUMBER
+        added_at: DATE
         modified_at: DATE
     }
 
-    user -- user
-    arkastlist --* user
-    arkast o-- note
-    arkastlist o-- arkast
-    user o-- comment
-    arkast *-- comment
-    arkast --* user
-    user *-- note
+
+    class following_infos {
+        id: NUMBER
+        idFollower: NUMBER
+        idFollowing: NUMBER
+        followed_at: DATE
+    }
+    
+    class mentioning_infos {
+        id: NUMBER
+        to: NUMBER
+        from: NUMBER
+    }
+
+    user -left- following_infos
+    arkast -right- arkast_file : contain >
+    ' user -right- arkast : manage >
+    user -down- livekast : organise >
+    user -down- reading_infos : watch >
+    talking_infos -right- livekast : contains <
+    arkast -down- reading_infos
+    user -right- creating_infos : send >
+    user -down- talking_infos : send >
+    creating_infos -right- arkast : contains <
+    user -up- arkastlist : manage >
+    adding_infos -left- arkastlist : have <
+    adding_infos -down- arkast : mention in <
+    reading_infos -down- comment : contain >
+    reading_infos -right- interaction_point : contain >
+    interaction_point -up- arkast : contain >
+    interaction_point -down- mentioning_infos : mention in >
+    comment -right- mentioning_infos : mention >
 }
 
 @enduml
