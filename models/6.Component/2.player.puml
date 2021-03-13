@@ -8,23 +8,22 @@ skinparam component {
 
 frame "cp: Player" {
     package "Player Core" {
-        [Player] -up-> [PlayerDOM]
-        [Player] -left-> [ActionsTimelineScheduler]
+        [Player] -up-> [ActionsTimelineScheduler]
+        [ActionsTimelineScheduler] -up- [ActionTriggers]
+        [Player] -left-> [PlayerDOM]
         [Player] <-right-> [PlayerMachineState]
-        [ActionsTimelineScheduler] -left- [ActionTriggers]
-        [ActionTriggers] -up-> [PlayerDOM]
-        [PlayerDOM] -up- [NodeBuilder]
+        [ActionsTimelineScheduler] -down-> [PlayerDOM]
+        [PlayerDOM] -left- [NodeBuilder]
         [PlayerDOM] -up- [NodeFormatedHandler]
     }
 
     package "Player Interface" {
-        [PlayerInterface] -down- [PlayerController]
-        [PlayerInterface] -right- [PlayerScreen]
+        [PlayerScreen]
         [PlayerController] -down- [PlayerProgressBar]
         [PlayerController] -down- [PlayButton]
         [PlayerController] -down- [VolumeHandler]
     }
-    
-    [Player] <-down- [PlayerInterface]
+    [PlayerScreen] -up- [PlayerDOM]
+    [PlayerController] -up-> [Player]
 }
 @enduml

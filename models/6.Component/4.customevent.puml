@@ -1,0 +1,24 @@
+@startuml "Custom provider component diagram"
+skinparam shadowing false
+skinparam monochrome true
+
+frame "cp: files handler" {
+    actor "User" as U
+    actor "Watcher" as W
+    component "Recording Plateform" {
+        U -down-> [PlateformInterface]
+        [RecorderCore] <-down- [CustomEventProvider]
+        [RecorderCore] <-up- [PlateformInterface]
+        [PlateformInterface] -right-> [NativeCore]
+        [RecorderCore] <-up- [NativeCore]
+    }
+    component "Replaying Plateform" {
+        W -down-> [PlayerInterface]
+        [PlayerCore] <-left- [CustomActionProvider]
+        [PlayerCore] <-up-> [PlayerInterface]
+        [PlayerCore] -down-> [IntegratedCore]
+    }
+    [RecorderCore] -left-> [PlayerCore]
+}
+
+@enduml
