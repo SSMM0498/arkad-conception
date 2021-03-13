@@ -1,0 +1,31 @@
+@startuml "interaction package component diagram"
+skinparam shadowing false
+skinparam monochrome true
+frame "cp: Player" {
+    actor "Watcher" as W
+
+
+    package "Interaction Core" {
+        rectangle RecorderCore
+        [InteractionHandler] <-down-> RecorderCore
+        [InteractionHandler] -left-> [InteractionPoint]
+        [InteractionHandler] -right-> [IntegratedCore]
+    }
+    
+    rectangle "Player Core" {
+        [Player] -left-> [PlayerDOM]
+    }
+    
+
+    rectangle "Player Interface" {
+       [PlayerScreen]
+       [PlayerController]
+    }
+
+    [InteractionHandler] <-up-> [Player]
+    [PlayerScreen] -down- [PlayerDOM]
+    [PlayerController] -down-> [Player]
+    W -down-> [PlayerScreen]
+    W -down-> [PlayerController]
+}
+@enduml
