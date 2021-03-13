@@ -4,26 +4,20 @@ skinparam monochrome true
 autoactivate on
 autonumber
 activate Client
-Client ->  Server: Request subscription
-Server ->  Server: Processing request infos
-alt exceeding the limit of subscription
-    Server --> Client: Denial access
-else successful case
-    alt wrong format of subscription infos
-        loop while format of subscription infos is wrong
-            Server --> Client: Request new subscription infos
-            Client ->  Server: Resend subscription infos
-            Server ->  Server: Processing request infos
-            deactivate Server
-        end
+loop while no access and no denial access
+    Client ->  Server: Request subscription
+    Server ->  Server: Process request infos
+    alt exceeding the limit of subscription
+        Server --> Client: Deny access
+    else wrong format of subscription infos
+        Server --> Client: Request new subscription infos
     else successful case
         Server --> Client: Authorization access
         Client ->  Server: Subcription complete
         Server ->  Server: Prepare a send flow
         deactivate Server
-        ref over Client, Server : Cast new event
-        |||
     end
 end
+ref over Client, Server : Cast new event
 
 @enduml

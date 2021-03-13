@@ -9,29 +9,27 @@ activate Recorder
 
 box "Live Server"
     participant Recorder
-    participant Buffer_S
-    participant Emitter_S
+    participant Bufferizer
 end box
 
 box "Live Client"
-    participant Emitter_C
-    participant Buffer_C
+    participant Scheduler
     participant Player
 end box
-
-Recorder ->  Buffer_S : New Event
-Buffer_S ->  Buffer_S : Bufferize the event
-deactivate Buffer_S
-Buffer_S -> Emitter_S : Order the transmission
-Emitter_S -> Emitter_C : Transfer the event
-Emitter_C -> Buffer_C : Save the event
-Buffer_C ->  Buffer_C : Insert the event
-deactivate Buffer_C
-alt missing events not yet retrieved > 1
-    Buffer_C ->  Emitter_C : Ask to resend missing event
-    deactivate Emitter_C
-    Emitter_C -> Emitter_S : Ask to resend missing event
+Recorder ->  Bufferizer : New Event
+deactivate Recorder
+Bufferizer ->  Bufferizer : Bufferize the event 
+deactivate Bufferizer
+loop buffer not empty
+    Bufferizer -> Scheduler : Emit the event
+    deactivate Bufferizer
+    Scheduler -> Scheduler : Save the event
+    deactivate Scheduler
+    Scheduler -> Player : Trigger the action
+    deactivate Player
+    Scheduler -> Bufferizer : Send Acknowledge
+    deactivate Scheduler
+    Bufferizer ->  Bufferizer : Remove event
 end
-Buffer_C -> Player : Trigger the action
 
 @enduml

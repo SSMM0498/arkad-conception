@@ -1,0 +1,11 @@
+@startuml "unsubscription sequence diagram"
+skinparam shadowing false
+skinparam monochrome true
+autoactivate on
+autonumber
+activate Client
+Client ->  Server: Request unsubscription
+Server ->  Server: Process request infos
+deactivate Server
+Server --> Client: Send acknowledge
+@enduml
