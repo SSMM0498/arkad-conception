@@ -3,25 +3,35 @@ left to right direction
 skinparam shadowing false
 skinparam monochrome true
 
-frame "us: Difference between watching as Creator and as Viewer" {
+frame "us: Creator and Viewer" {
     actor Viewer
     actor Creator
+    actor Unregister
 
-    package System {
-        :Viewer: --> (Watch arkast)
-        :Viewer: --> (Search arkast)
-        :Creator: --> (Log in)
+    Viewer <|-left- Creator
+    Unregister -right-|> Viewer
 
-        (Search arkast) ..> (Watch arkast) : <<extend>>
-        (Log in) ..> (Evaluate arkast) : <<extend>>
-        (Log in) ..> (Manage Note) : <<extend>>
-        (Evaluate arkast) ..> (Watch arkast) : <<extend>>
-        (Evaluate arkast) <|-- (Rate arkast)
-        (Evaluate arkast) <|-- (Comment arkast)
-        (Manage Note) ..> (Watch arkast) : <<extend>>
+    rectangle System {
+        (Log in)
+        (Manage Note)
+        (Manage Account)
+        (Appreciate arkast)
+        (Search arkast)
+        (Watch arkast)
+        (Register)
+
     }
-
-    Viewer <|-- Creator
+    
+    (Search arkast) .down.> (Watch arkast) : <<extend>>
+    (Watch arkast) <.up. (Appreciate arkast) : <<extend>>
+    
+    :Creator: -- (Log in)
+    :Creator: -- (Manage Note)
+    :Creator: -- (Manage Account)
+    :Creator: -- (Appreciate arkast)
+    :Viewer: -- (Watch arkast)
+    :Viewer: -- (Search arkast)
+    :Unregister: -- (Register)
 }
 
 @enduml

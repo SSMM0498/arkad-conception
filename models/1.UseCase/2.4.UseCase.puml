@@ -7,8 +7,10 @@ frame "uc: Creator - Manage Account" {
     actor Creator
 
     rectangle System {
-        :Creator: --> (Edit profile)
-        (Edit profile) <.. (Delete Account) : << extend >>
+        (Edit profile)
+        (Delete Account)
     }
+    :Creator: -- (Edit profile)
+    (Edit profile) <.. (Delete Account) : << extend >>
 }
 @enduml

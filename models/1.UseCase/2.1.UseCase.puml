@@ -7,11 +7,16 @@ frame "uc: Creator - Authentification" {
     actor Creator
 
     rectangle System {
-        :Creator: --> (Log in)
-        (Log in) ..> (Recover password) : << extend >>
-        (Log in) <|-- (With Google)
-        (Log in) <|-- (With Github)
+        (Log in)
+        (Recover password)
+        (With Google)
+        (With Github)
     }
+
+    :Creator: --> (Log in)
+    (Log in) ..> (Recover password) : << extend >>
+    (Log in) <|-- (With Google)
+    (Log in) <|-- (With Github)
 }
 
 @enduml

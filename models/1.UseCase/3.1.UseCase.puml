@@ -9,15 +9,15 @@ frame "uc: Viewer Creator- Watch Arkast" {
 
     rectangle System {
         :Viewer: --> (Play Arkast)
-        :Viewer: --> (Change Volume)
-        :Viewer: --> (Change Arkast)
         :Viewer: --> (Pause Arkast)
-        :Viewer: --> (Go Next/Previous Arkast)
 
-        (Pause Arkast) ..> UA : <<extend>>
+        (Pause Arkast) <.. UA : <<extend>>
+        (Pause Arkast) <.. CIP : <<extend>>
 
         package "Use Arkad" as UA {
-            
+        }
+
+        package "Manage Interaction Point" as CIP {
         }
     }
 }

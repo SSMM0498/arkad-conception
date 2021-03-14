@@ -7,26 +7,23 @@ frame "uc: Creator - Manage Arkast List" {
     actor Creator
 
     rectangle System {
-
-        :Creator: --> (Create arkast)
-        :Creator: --> (Search arkast)
-        :Creator: --> (List arkasts)
-        :Creator: --> (Manage playlists)
-        (Search arkast) ..> (List arkasts) : << include >>
-        (Create arkast) <.. (Publy arkast) : << extend >>
-        (List arkasts) <.. (Hide arkast) : << extend >>
-        (List arkasts) <.. (Edit arkast) : << extend >>
-        (List arkasts) <.. (Publy arkast) : << extend >>
-        (List arkasts) <.. (Add to playslists) : << extend >>
-        (Manage playlists) <|-- (Create playslists)
-        (Manage playlists) <|-- (Edit playslists)
-        (Manage playlists) <|-- (Delete playslists)
-        (Manage playlists) <|-- (Remove Arkast)
-        (Create arkast) ..> UA : << include >>
+        (Create arkast)
+        (Search arkast)
+        (List arkasts)
+        (Manage playlists)
+        (Publy arkast)
         package "Use Arkad" as UA {
-                
+
         }
     }
+    (Search arkast) .left.> (List arkasts) : << include >>
+    (Create arkast) <.. (Publy arkast) : << extend >>
+    (Create arkast) ..> UA : << include >>
+
+    :Creator: -- (Create arkast)
+    :Creator: -- (Search arkast)
+    :Creator: -- (List arkasts)
+    :Creator: -- (Manage playlists)
 }
 
 @enduml
