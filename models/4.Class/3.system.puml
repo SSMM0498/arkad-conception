@@ -3,135 +3,150 @@ skinparam shadowing false
 skinparam monochrome true
 
 frame "cl: System Class Diagram" {
-    class user {
-        id: NUMBER
-
-        username: STRING
-        email: EMAIL
-        password: HASH
-
-        firstname: STRING
-        lastname: STRING
-        bio: TEXT
-        
-        githubcount: STRING
-        googlecount: STRING
-        
-        status: online | disconnected
-        follow: LISTUSER
-        workspacehash: STRING
-        
-        created_at: DATE
-        modified_at: DATE
+    enum Status {
+        online
+        disconnected
     }
 
+    rectangle "User" {
+        class user {
+            id: NUMBER
 
-    class arkast {
-        id: NUMBER
-        title: STRING
-        description: TEXT
-        duration: TIME
-        likes: NUMBER
-        views: NUMBER
-        published_at: DATE
-        modified_at: DATE
-    }
-    
-    class livekast {
-        id: NUMBER
-        from: NUMBER
-        scheduledFor: DATE
-    }
+            username: STRING
+            email: EMAIL
+            password: HASH
 
-    class arkast_file {
-        id: NUMBER
-        events: JSON
-        env_data: JSON
-        audio: TEXT
-    }
-    
-    class creating_infos {
-        id: NUMBER
-        idUser: NUMBER
-        idArkast: NUMBER
-        created_at: TIME
-    }
-    
-    class reading_infos {
-        id: NUMBER
-        idUser: NUMBER
-        idArkast: NUMBER
-        like: BOOLEAN
-        resume_time: TIME
-    }
-    
-    class talking_infos {
-        id: NUMBER
-        idUser: NUMBER
-        idLivekast: NUMBER
-        message: TEXT
-        timestamp: TIME
+            firstname: STRING
+            lastname: STRING
+            bio: TEXT
+
+            githubcount: STRING
+            googlecount: STRING
+
+            status: Status
+            follow: LISTUSER
+            workspacehash: STRING
+
+            created_at: DATE
+            modified_at: DATE
+
+        }
+
+        class following_infos {
+            id: NUMBER
+            idFollower: NUMBER
+            idFollowing: NUMBER
+            followed_at: DATE
+        }
     }
 
-    class interaction_point {
-        id: NUMBER
-        idArkast: NUMBER
-        title: STRING
-        pin_at: TIME
-        created_at: DATE
-        modified_at: DATE
-        payload: JSON
-    }
-    
-    class comment {
-        id: NUMBER
-        nestedIn: NUMBER
-        form: NUMBER
-        content: TEXT
-        published_at: DATE
-    }
-    
-    class arkastlist {
-        id: NUMBER
-        idUser: NUMBER
-        title: STRING
-        arkasts: LISTARKAST
-        published_at: DATE
-        modified_at: DATE
+    rectangle "Arkast creation" {
+        class arkast {
+            id: NUMBER
+            title: STRING
+            description: TEXT
+            duration: TIME
+            likes: NUMBER
+            views: NUMBER
+            published_at: DATE
+            modified_at: DATE
+        }
+
+        class arkast_file {
+            id: NUMBER
+            events: JSON
+            env_data: JSON
+            audio: TEXT
+        }
+
+        class creating_infos {
+            id: NUMBER
+            idUser: NUMBER
+            idArkast: NUMBER
+            created_at: TIME
+        }
     }
 
-    class adding_infos {
-        id: NUMBER
-        index: NUMBER
-        added_at: DATE
-        modified_at: DATE
+    rectangle "Live" {
+        class livekast {
+            id: NUMBER
+            from: NUMBER
+            scheduledFor: DATE
+        }
+
+        class message {
+            id: NUMBER
+            idUser: NUMBER
+            idLivekast: NUMBER
+            message: TEXT
+            timestamp: TIME
+        }
     }
 
+    rectangle "Arkast Listing"{
+        class arkastlist {
+            id: NUMBER
+            idUser: NUMBER
+            title: STRING
+            arkasts: LISTARKAST
+            published_at: DATE
+            modified_at: DATE
+        }
 
-    class following_infos {
-        id: NUMBER
-        idFollower: NUMBER
-        idFollowing: NUMBER
-        followed_at: DATE
-    }
-    
-    class mentioning_infos {
-        id: NUMBER
-        to: NUMBER
-        from: NUMBER
+        class adding_infos {
+            id: NUMBER
+            index: NUMBER
+            added_at: DATE
+            modified_at: DATE
+        }
     }
 
-    user -left- following_infos
-    arkast -right- arkast_file : contain >
-    ' user -right- arkast : manage >
+    rectangle "Arkast Viewing" {
+        class reading_infos {
+            id: NUMBER
+            idUser: NUMBER
+            idArkast: NUMBER
+            like: BOOLEAN
+            resume_time: TIME
+        }
+
+        class interaction_point {
+            id: NUMBER
+            idArkast: NUMBER
+            title: STRING
+            pin_at: TIME
+            created_at: DATE
+            modified_at: DATE
+            payload: JSON
+        }
+
+        class comment {
+            id: NUMBER
+            nestedIn: NUMBER
+            form: NUMBER
+            content: TEXT
+            published_at: DATE
+        }
+
+        class mentioning_infos {
+            id: NUMBER
+            to: NUMBER
+            from: NUMBER
+        }
+    }
+
+    user -up- arkastlist : manage >
+    user -left- following_infos: follow >
+    user -left- following_infos: followed by <
+    user -right- creating_infos : create >
     user -down- livekast : organise >
     user -down- reading_infos : watch >
-    talking_infos -right- livekast : contains <
-    arkast -down- reading_infos
-    user -right- creating_infos : send >
-    user -down- talking_infos : send >
+    user -down- message : send >
+    ' user -right- arkast : manage >
+    message -left- livekast : contains <
+    arkast -right- arkast_file : contain >
+    arkast -down- reading_infos : watched >
     creating_infos -right- arkast : contains <
-    user -up- arkastlist : manage >
     adding_infos -left- arkastlist : have <
     adding_infos -down- arkast : mention in <
     reading_infos -down- comment : contain >
