@@ -1,22 +1,21 @@
-@startuml "live server component diagram"
+@startuml "Live Server Component Diagram"
 skinparam shadowing false
 skinparam monochrome true
 
-frame "cp: live server" {
+frame "cp: Live Server" {
+    rectangle "Viewer Side"{
+        [Scheduler] -up-> [C-Listerner]
+        [Scheduler] -down-> [C-Emitter]
+        [Scheduler] -right-> [Player]
+    }
     rectangle "Streamer Side"{
         [Bufferizer] -up-> [S-Emitter]
-        [Bufferizer] <-down- [S-Listerner]
-        [Bufferizer] <-right- [Recorder]
-    }
-    
-    rectangle "Viewer Side"{
-        [Scheduler] <-up- [C-Listerner]
-        [Scheduler] -down-> [C-Emitter]
-        [Scheduler] <-left-> [Player]
+        [Bufferizer] -down-> [S-Listerner]
+        [Bufferizer] -left-> [Recorder]
     }
 
-    [C-Listerner] <-right- [S-Emitter]
-    [S-Listerner] <-left- [C-Emitter]
+    [C-Listerner] <.left. [S-Emitter]
+    [S-Listerner] <.right. [C-Emitter]
 }
 
 @enduml

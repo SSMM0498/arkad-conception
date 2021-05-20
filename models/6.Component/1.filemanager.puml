@@ -1,10 +1,11 @@
-@startuml "files handler component diagram"
+@startuml "Files Handler Component Diagram"
 skinparam shadowing false
 skinparam monochrome true
 
-frame "cp: files handler" {
+frame "cp: Files handler" {
     rectangle "Client Side"{
         [Compressor]
+        [Decompressor]
         [Uploader]
         [Downloader]
         package "recorder" {
@@ -15,17 +16,15 @@ frame "cp: files handler" {
         }
 
         [Recorder] -up-> [Uploader]
-        [Player] <-up-> [Downloader]
+        [Player] -up-> [Downloader]
     }
     rectangle "Server Side"{
         [FileHandler]
     }
 
-    [Uploader] <-right-> [Compressor]
-    [Downloader] <-left-> [Compressor]
+    [Uploader] -right-> [Compressor]
+    [Downloader] -left-> [Decompressor]
     [Uploader] -up-> [FileHandler]
-    [Downloader] <-up-> [FileHandler]
-
+    [Downloader] -up-> [FileHandler]
 }
-
 @enduml

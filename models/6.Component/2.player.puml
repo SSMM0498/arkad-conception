@@ -1,4 +1,4 @@
-@startuml "player component diagram"
+@startuml "Player Component Diagram"
 skinparam shadowing false
 skinparam monochrome true
 skinparam componentStyle rectangle
@@ -9,9 +9,9 @@ skinparam component {
 frame "cp: Player" {
     package "Player Core" {
         [Player] -up-> [ActionsTimelineScheduler]
-        [ActionsTimelineScheduler] -up- [ActionTriggers]
+        [ActionsTimelineScheduler] -up-> [ActionTriggers]
         [Player] -left-> [PlayerDOM]
-        [Player] <-right-> [PlayerMachineState]
+        [Player] -right-> [PlayerMachineState]
         [ActionsTimelineScheduler] -down-> [PlayerDOM]
         [PlayerDOM] -left- [NodeBuilder]
         [PlayerDOM] -up- [NodeFormatedHandler]
