@@ -1,0 +1,18 @@
+@startuml "recorder state diagram"
+skinparam shadowing false
+skinparam monochrome true
+
+' frame "st: recorder state diagram" {
+    [*] --> Ready : arkast clicked
+    Ready --> Recording : record button pressed
+    Recording --> Pause : pause button pressed
+    Pause --> Recording : record button pressed
+    Recording --> Stop : stop button pressed
+    Pause --> Stop : record button pressed
+    Stop --> Uploading : file are ready
+    Uploading --> [*] : quit the record
+    Recording --> [*] : quit the record
+    Pause --> [*] : quit the record
+' }
+
+@enduml

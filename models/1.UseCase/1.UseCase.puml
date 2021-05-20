@@ -6,10 +6,10 @@ skinparam monochrome true
 frame "us: Creator and Viewer" {
     actor Viewer
     actor Creator
-    actor Unregister
+    actor Visitor
 
     Viewer <|-left- Creator
-    Unregister -right-|> Viewer
+    Visitor -right-|> Viewer
 
     rectangle System {
         (Log in)
@@ -19,7 +19,6 @@ frame "us: Creator and Viewer" {
         (Search arkast)
         (Watch arkast)
         (Register)
-
     }
     
     (Search arkast) .down.> (Watch arkast) : <<extend>>
@@ -31,7 +30,7 @@ frame "us: Creator and Viewer" {
     :Creator: -- (Appreciate arkast)
     :Viewer: -- (Watch arkast)
     :Viewer: -- (Search arkast)
-    :Unregister: -- (Register)
+    :Visitor: -- (Register)
 }
 
 @enduml

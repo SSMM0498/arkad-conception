@@ -3,7 +3,7 @@ left to right direction
 skinparam shadowing false
 skinparam monochrome true
 
-frame "uc: Viewer Creator- Watch Arkast" {
+frame "uc: Viewer Creator - Watch Arkast" {
     actor Viewer
     ' actor Creator
 
