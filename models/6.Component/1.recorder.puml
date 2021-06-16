@@ -3,12 +3,12 @@ skinparam shadowing false
 skinparam monochrome true
 
 frame "cp: Recorder" {
-    [Recorder] -right-> [Listener]
-    [Recorder] -up-> [NodeEncoder]
-    [Recorder] -down-> [WatchersHandler]
-    [IframeManager] -down-> [WatchersHandler]
-    [Recorder] -left-> [IframeManager]
-    [WatchersHandler] -left-> [MutationBuffer]
-    [MutationBuffer] -up-> [NFMHandler]
+    [Recorder] .down.> [Listener]
+    [Recorder] .up.> [NodeEncoder]
+    [Recorder] .down.> [WatchersHandler]
+    [IframeManager] .down.> [WatchersHandler]
+    [Recorder] .left.> [IframeManager]
+    [WatchersHandler] .down.> [MutationBuffer]
+    [MutationBuffer] .up.> [NFMHandler]
 }
 @enduml

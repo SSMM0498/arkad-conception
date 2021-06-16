@@ -3,21 +3,20 @@ skinparam shadowing false
 skinparam monochrome true
 
 ' frame "st: player state diagram" {
-    [*] --> Init : arkast clicked
-    Init --> Play : player is ready
-    Interact --> Play : play button pressed
-    Pause --> Play : play button pressed
-    Play --> Pause : pause button pressed
-    Pause --> Interact : use arkador
-    Interact --> Pause : cancel modification
-    Pause --> Exiting : quit player
-    Play --> Exiting : quit player
-    Interact --> Exiting : quit player
-    state c <<choice>>
-    Play --> c : arkast over
-    c --> Init : [next arkast exist]
-    c --> Exiting  : [next arkast not exist]
-    Exiting --> [*] : quit the player
+    [*] -down-> Init : arkast clicked
+    Init --> Playing : play button pressed
+    State Playing {
+        [*] -down-> Play
+        Play -down-> Pause : pause button pressed
+        Pause -up-> Play : play button pressed
+        Pause --> Interact : use arkador
+        Interact --> Pause : cancel modification
+        Interact --> Record : record interaction
+        Record -right-> Handle : stop recording
+        Handle -right-> Interact : back to interactive mode
+    }
+    Playing --> Exit : quit player
+    Exit --> [*] : quit the player
 ' }
 
 @enduml
