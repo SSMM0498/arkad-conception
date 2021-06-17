@@ -16,11 +16,12 @@ frame "cp: Custom Event Handling" {
 
     rectangle "Replaying View" {
         actor "Watcher" as W
+
         W -down-> [PlayerInterface]
         [PlayerCore] -left-> [CustomActionProvider]
+        [PlayerCore] -right-> [PlateformState]
         [PlayerCore] <-up- [PlayerInterface]
-        [PlayerCore] -down-> [IntegratedCore]
-        [PlayerCore] -right-> [IntegratedPlateform]
+        [PlayerCore] -down-> [InteractionCore]
     }
 }
 

@@ -3,7 +3,7 @@ skinparam shadowing false
 skinparam monochrome true
 
 ' frame "st: player state diagram" {
-    [*] -down-> Init : arkast clicked
+    [*] -right-> Init : arkast clicked
     Init --> Playing : play button pressed
     State Playing {
         [*] -down-> Play
@@ -16,7 +16,7 @@ skinparam monochrome true
         Handle -right-> Interact : back to interactive mode
     }
     Playing --> Exit : quit player
-    Exit --> [*] : quit the player
+    Exit -right-> [*] : quit the player
 ' }
 
 @enduml

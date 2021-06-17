@@ -7,23 +7,21 @@ skinparam component {
 }
 
 frame "cp: Player" {
-    package "Player Core" {
-        [Player] -up-> [ActionsTimelineScheduler]
-        [ActionsTimelineScheduler] -up-> [ActionTriggers]
-        [Player] -left-> [PlayerDOM]
-        [Player] -right-> [PlayerMachineState]
-        [ActionsTimelineScheduler] -down-> [PlayerDOM]
-        [PlayerDOM] -left- [NodeBuilder]
-        [PlayerDOM] -up- [NodeFormatedHandler]
+    component "Player Core" {
+        [PlayerMachineState] .left.> [ActionsTimelineScheduler]
+        [ActionsTimelineScheduler] .left.> [ActionTriggers]
+        [Player] .up.> [StateEmitter]
+        [StateEmitter] <.up. [PlayerMachineState]
+        [ActionsTimelineScheduler] .down.> [PlayerDOM]
+        [PlayerDOM] .down.> [NodeBuilder]
+        [PlayerDOM] .left.> [NodeFormatedHandler]
     }
 
-    package "Player Interface" {
+    component "Player Interface" {
         [PlayerScreen]
-        [PlayerController] -down- [PlayerProgressBar]
-        [PlayerController] -down- [PlayButton]
-        [PlayerController] -down- [VolumeHandler]
+        [PlayerController]
     }
-    [PlayerScreen] -up- [PlayerDOM]
-    [PlayerController] -up-> [Player]
+    [PlayerScreen] <.up. [NodeBuilder]
+    [PlayerController] .up.> [Player]
 }
 @enduml

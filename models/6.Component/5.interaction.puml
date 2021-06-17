@@ -1,31 +1,34 @@
-@startuml "interaction package component diagram"
+@startuml "Interaction Package Component Diagram"
 skinparam shadowing false
 skinparam monochrome true
-frame "cp: Player" {
+
+frame "cp: Interaction Package" {
     actor "Watcher" as W
 
+    rectangle "Interaction Core" {
+        collections InteractionPoint
+        [InteractionHandler] -right-> InteractionPoint
+    }
 
-    package "Interaction Core" {
-        rectangle RecorderCore
-        [InteractionHandler] <-down-> RecorderCore
-        [InteractionHandler] -left-> [InteractionPoint]
-        [InteractionHandler] -right-> [IntegratedCore]
-    }
-    
+    [InteractionHandler] -down-> [RecorderCore]
+    [InteractionHandler] -left-> [NativeCore]
+
     rectangle "Player Core" {
-        [Player] -left-> [PlayerDOM]
+        [Player] -right-> [PlayerDOM]
     }
-    
 
     rectangle "Player Interface" {
-       [PlayerScreen]
        [PlayerController]
+       [PlayerScreen]
+       [PlateformInterface]
     }
 
-    [InteractionHandler] <-up-> [Player]
+    [InteractionHandler] <-up- [Player]
     [PlayerScreen] -down- [PlayerDOM]
+    [NativeCore] <-up-> [PlateformInterface]
     [PlayerController] -down-> [Player]
-    W -down-> [PlayerScreen]
     W -down-> [PlayerController]
+    W --> [PlateformInterface]
 }
+note "To handle the multi-timeline \n mode we must have a list of \n pair eventList and audio" as n1
 @enduml
