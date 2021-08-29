@@ -1,0 +1,40 @@
+@startuml "Kast Editor Component Diagram"
+skinparam shadowing false
+skinparam monochrome true
+skinparam componentStyle rectangle
+skinparam component {
+  FontSize 17
+}
+
+frame "cp: Kast Editor" {
+    component "Player Core" {
+        [Player]
+    }
+
+    component "Player Interface" {
+        [PlayerController]
+    }
+
+    [PlayerController] .down.> [Player]
+
+    collections Events
+    [Player] -down-> Events
+
+    component "Editor Interface" {
+        [ChapterEndPoints]
+        [ChapterList]
+    }
+
+    component "Editor Core" {
+        collections Chapters
+        [ChapterHandler] -left-> Chapters
+        [PartitionHandler] -up-> Chapters
+    }
+    
+    [PartitionHandler] -right-> Events
+
+    [ChapterEndPoints] .left.> [PlayerController]
+    Chapters .up.> [ChapterEndPoints]
+    Chapters .up.> [ChapterList]
+}
+@enduml

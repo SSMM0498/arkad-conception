@@ -3,7 +3,7 @@ skinparam shadowing false
 skinparam monochrome true
 skinparam componentStyle rectangle
 skinparam component {
-  FontSize 18
+  FontSize 17
 }
 
 frame "cp: Player" {
@@ -15,6 +15,9 @@ frame "cp: Player" {
         [ActionsTimelineScheduler] .down.> [PlayerDOM]
         [PlayerDOM] .down.> [NodeBuilder]
         [PlayerDOM] .left.> [NodeFormatedHandler]
+        collections Events
+        Player -up-> Events
+        ActionsTimelineScheduler -down-> Events
     }
 
     component "Player Interface" {
