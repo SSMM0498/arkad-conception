@@ -1,0 +1,26 @@
+@startmindmap recorder
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
++ Événements
+++ Directement Perceptibles
++++ Changements du DOM
+++++ Création/Suppression de nœud,
+++++ Changements d'attribut de noeud
+++++ Changements de texte
++++ Manipulation du DOM
+++++ Clique sur un nœud
+++++ Focus, Blur de nœud
+++++ Saisit dans un champ
+++++ Selection de texte
+++++ Scroll de la page
++++ Actions Systèmes
+++++ Mouvement du Curseur
+++++ Changement de Curseur
+++++ Affichage du Menu Context
+-- Indirectement Perceptibles
+--- Affichage Console
+--- Raccourci clavier
+--- Modification de Variables
+@endmindmap
