@@ -18,6 +18,7 @@ frame "cp: Kast Editor" {
     [PlayerController] .down.> [Player]
 
     collections Events
+    file Audio
     [Player] -down-> Events
 
     component "Editor Interface" {
@@ -28,10 +29,13 @@ frame "cp: Kast Editor" {
     component "Editor Core" {
         collections Chapters
         [ChapterHandler] -left-> Chapters
-        [PartitionHandler] -up-> Chapters
+        [Partitionner] -up-> Chapters
+        [Partitionner] <|-down- [AudioPartitioner]
+        [Partitionner] <|-right- [EventPartitioner]
     }
     
-    [PartitionHandler] -right-> Events
+    [EventPartitioner] -right-> Events
+    [AudioPartitioner] -right-> Audio
 
     [ChapterEndPoints] .left.> [PlayerController]
     Chapters .up.> [ChapterEndPoints]

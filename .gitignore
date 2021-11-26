@@ -1,13 +1,4 @@
-scimBa.pdf
-scrimba.pdf
-scrimbA.pdf
 notes.md
-infos_buffer.txt
 out/
 concept.code-workspace
-Simple Browser - template-typescript-node - Gitpod Code.pdf
-theia/Theia _ de la vision à l'architecture - DESOSA.pdf
-theia/Theia _ Qualité et évolution - DESOSA.pdf
-theia/Theia _ Vision Produit - DESOSA.pdf
-theia/Théia et variabilité - DESOSA.pdf
-gitpod/Simple Browser - template-typescript-node - Gitpod Code.html
+samples/**/*

@@ -181,13 +181,12 @@ type styleSheetRuleData = {
 +   incrementalData
 ```typescript
 type incrementalData =
-    | mutationData
-    | mousemoveData
-    | mouseInteractionData
-    | scrollData
-    | viewportResizeData
-    | inputData
-    | mediaInteractionData
-    | styleSheetRuleData
-    | textSelectionData
+    | mutationData              //  For all DOM changes
+    | mousemoveData             //  For mouse movement
+    | mouseInteractionData      //  For mouse click, blur, focus...
+    | scrollData                //  For scroll movement
+    | viewportResizeData        //  For view port resizing
+    | inputData                 //  For all input changes (input, select, textarea...)
+    | mediaInteractionData      //  For video or audio play/pause/stop...
+    | textSelectionData         //  For text selection
 ```

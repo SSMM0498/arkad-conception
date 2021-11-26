@@ -16,14 +16,19 @@ frame "cp: Player" {
         [PlayerDOM] .down.> [NodeBuilder]
         [PlayerDOM] .left.> [NodeFormatedHandler]
         collections Events
+        file Audio
         Player -up-> Events
         ActionsTimelineScheduler -down-> Events
+        [EventAudioSynchronizer] -down-> ActionsTimelineScheduler
+        [EventAudioSynchronizer] -right-> Audio
+        [EventAudioSynchronizer] <.down. PlayerMachineState
     }
 
     component "Player Interface" {
         [PlayerScreen]
         [PlayerController]
     }
+
     [PlayerScreen] <.up. [NodeBuilder]
     [PlayerController] .up.> [Player]
 }
