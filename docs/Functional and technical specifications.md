@@ -138,7 +138,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | 6.e | The user writes differents password |
 | 6.f | The user's password is not almost strong |
 | End | Nominal scenario : in steps 2, 3, 4, 5 or 6, by decision of the user |
-| Preconditions | The user is logged in |
+| Postconditions | The user is logged in |
 | **Complements** |
 | Ergonomics |
 |  |
@@ -167,7 +167,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | Alternatif Scenario |
 | 4.a | The system cannot retrives the user informations. |
 | End | Nominal scenario : in steps 2, 3, 4, 5 or 6, by decision of the user |
-| Preconditions | The user is logged in |
+| Postconditions | The user is logged in |
 | **Complements** |
 | Ergonomics |
 |  |
@@ -197,7 +197,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | 6.a | The user doesn't fill all inputs |
 | 6.b | The system doesn't find this combination of username and password |
 | End | Nominal scenario : in steps 2, 3 or 4, by decision of the user |
-| Preconditions | The user is logged in |
+| Postconditions | The user is logged in |
 | **Complements** |
 | Ergonomics |
 |  |
@@ -222,7 +222,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | Alternatif Scenario |
 | none |
 | End |
-| Preconditions | The user is logged out |
+| Postconditions | The user is logged out |
 | **Complements** |
 | Ergonomics |
 |  |
@@ -249,7 +249,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | 1.a | The user enters a keyword that he has already entered before |
 | 3.a | The system doesn't find this keyword in all arkast in the database |
 | End | Nominal scenario : in steps 1, 2, by decision of the user |
-| Preconditions | The user is logged in |
+| Postconditions | The user is logged in |
 | **Complements** |
 | Ergonomics |
 |  |
@@ -277,7 +277,7 @@ All the Include and Extends relationships can be understood from the diagram. As
 | Alternatif Scenario |
 | 5.a | The system detects some errors in the code |
 | End | Nominal scenario : in steps 2 or 3 by decision of the user |
-| Preconditions | The user see the code result |
+| Postconditions | The user see the code result |
 | **Complements** |
 | Ergonomics |
 |  |
