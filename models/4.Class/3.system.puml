@@ -16,16 +16,24 @@ frame "cl: System Class Diagram" {
             email: EMAIL
             password: HASH
 
+            ---
+
             firstname: STRING
             lastname: STRING
             bio: TEXT
+            
+            ---
 
             githubcount: STRING
             googlecount: STRING
+            
+            ---
 
             status: Status
             follow: LISTUSER
             workspacehash: STRING
+            
+            ---
 
             created_at: DATE
             modified_at: DATE
