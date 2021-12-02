@@ -1,0 +1,115 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "pk: Different type of Profile" {
+    actor Registered
+    actor Pro
+    actor FreeSchool
+    actor Visitor
+    actor Substitute
+    actor BusinessSchool
+    actor Admin
+    actor Manager
+
+    Registered <|-up- Pro
+    Registered <|-left- FreeSchool #line:white
+    Pro <|-left- FreeSchool
+    FreeSchool <|-left- BusinessSchool
+    FreeSchool <|-up- Substitute
+    Visitor <|-left- Admin
+    Admin <|-left- Manager
+
+    rectangle "Front-office" {
+        package "Services" as SE {
+            package "Manage Cursus" as MCU {
+            }
+            package "Manage Cursus" as MCU {
+            }
+            package "Manage Live" as MLI {
+            }
+            package "Manage Account" as MAc {
+            }
+            package "Manage Content" as MCO {
+            }
+            package "Manage Access" as MAC {
+            }
+            package "Manage Actors" as MST {
+            }
+            package "Use Content" as UCO {
+            }
+            package "Manage Selling" as MSE {
+            }
+            package "Manage Room" as MR {
+            }
+
+            MCU .left. MLI #line:white
+            MST .left. MSE #line:white
+            MCU .left. MLI #line:white
+            MCO .left. MAc #line:white
+            MAc .left. MAC #line:white
+            MAC .left. MST #line:white
+            MCO .right.> UCO
+            MLI .left.> UCO
+        }
+
+        package "Security" as S {
+        }
+
+        SE .left.> S
+    }
+
+    :BusinessSchool: -right- MSE
+    :Pro: -left- MLI
+    :Pro: -right- MCU
+    :Registered: -- MAc
+    :Registered: -- MCO
+    :Registered: -- UCO
+    ' :Visitor: -up- S #line:white;line.dashed
+    :Visitor: -up- MLI #line:white;line.dashed
+    :Visitor: -left- UCO
+    :FreeSchool: -left- MAC
+    :FreeSchool: -right- MST
+    :FreeSchool: -right- MR
+
+    rectangle "Back-office" {
+        package "Manage Manager office" as _MAN {
+        }
+        package "Manage Arkast office" as _MA {
+        }
+        package "Manage User office" as _MU {
+        }
+        package "Manage Adds office" as _MAD {
+        }
+        package "Manage Billing office" as _MB {
+        }
+        package "Manage Reporting" as _MR {
+        }
+        package "Manage Claiming" as _MC {
+        }
+        package "Manage App" as _MAP {
+        }
+        package "Setting App" as _SAP {
+        }
+        package "Manage Architecture" as _MAR {
+        }
+        _MAP <|-down- _SAP
+        _MAP <|-down- _MAR
+        _MR <|-right- _MC
+        _MU .down.> _MR
+        _MA .down.> _MR
+        _MAD .down.> _MR
+        _MB .down.> _MR
+    }
+
+    ' _SAP -- S
+    :Admin: -down- _MAN
+    :Admin: -down- _MAP
+    :Admin: -down- _MA
+    :Admin: -down- _MU
+    :Admin: -down- _MAD
+    :Admin: -down- _MB
+}
+
+@enduml

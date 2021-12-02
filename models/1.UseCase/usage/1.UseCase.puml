@@ -1,0 +1,72 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Use kast" {
+    actor Visitor
+    actor Registered
+
+    Visitor <|-left- Registered
+
+    package "Appreciate Kast" {
+        (Report kast)
+        (Comment kast)
+        (Rate kast)
+        (Bookmark kast)
+    }
+
+    package "List Kast" {
+        (List kast)
+        (Search kast)
+        (Filter kast)
+    }
+
+    package "Open Kast" as OK {
+        (Share kast)
+        (Watch kast)
+        (Use kast)
+        (Manage note)
+        (Resume kast)
+    }
+    package "Player" {
+    }
+    package "IDE" {
+    }
+    package "Recorder" {
+    }
+
+    (Watch kast) .down.> Player : <<extend
+    Player <.down. IDE: <<extend>>
+    Recorder <.down. IDE: <<extend>>
+    Recorder <.right. Player: <<extend>>
+
+    package "Interact Profile" {
+        (Open author profile)
+        (Subscribe author)
+        (Report author)
+    }
+
+    :Visitor: -up- (List kast)
+    :Visitor: -up- (Search kast)
+    :Visitor: -up- (Filter kast)
+
+    :Visitor: -down- (Watch kast)
+    :Visitor: -down- (Use kast)
+    :Registered: -down- (Resume kast)
+    :Registered: -right- (Create kast)
+    (Create kast) -right- Recorder
+
+    :Visitor: -down- (Open author profile)
+    :Registered: -up- (Subscribe author)
+    :Registered: -up- (Report author)
+
+    :Visitor: -up- (Share kast)
+    :Registered: -up- (Bookmark kast)
+    :Registered: -up- (Manage note)
+    :Registered: -up- (Report kast)
+    :Registered: -up- (Comment kast)
+    :Registered: -up- (Rate kast)
+}
+
+@enduml

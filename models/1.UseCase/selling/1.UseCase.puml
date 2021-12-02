@@ -1,0 +1,41 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Manage Selling" {
+    actor BusinessSchool
+    actor Registered
+
+    package "Manage Selling" as MSE {
+        (Sell content) <|-left- (Subscribable)
+        (Sell content) <|-down- (Rentable)
+        (Sell content) <|-down- (Buyable)
+        (View sales report)
+    }
+
+    package "Use Content" as UCO {
+        (Buy content)
+        (Subscribe content)
+        (Rent content)
+    }
+
+    (Buyable) .down.> (Buy content) : <<extend>>
+    (Subscribable) .down.> (Subscribe content) : <<extend>>
+    (Rentable) .down.> (Rent content) : <<extend>>
+
+    :Registered: -up- (Buy content)
+    :Registered: -up- (Subscribe content)
+    :Registered: -up-  (Rent content)
+
+    :BusinessSchool: -down- (Sell content)
+    :BusinessSchool: -left- (View sales report)
+    ' :School: -up- (List join request)
+    ' :School: -up- (Open requester profile)
+    ' :School: -up- (Block requester)
+
+    ' :Register: -down- (Request to join)
+    ' :Register: -down- (Use content)
+}
+
+@enduml

@@ -17,7 +17,7 @@ frame "uc: Viewer Creator - Watch Arkast" {
         package "Use Arkad" as UA {
         }
 
-        package "Manage Interaction Point" as CIP {
+        package "Manage Note" as CIP {
         }
     }
 }

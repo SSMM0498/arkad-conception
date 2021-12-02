@@ -1,0 +1,53 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Manage Basics Contents" {
+    actor Creator
+    actor Pro
+
+    Creator <|-left- Pro
+
+    package "Recorder" {
+    }
+    package "Editor" {
+    }
+    package "IDE" {
+    }
+
+    Recorder <.down. IDE: <<extend>>
+
+    package "Manage Arkast " {
+        (Create kast)
+        (Publish kast) <|-left- (Schedule) : <<extend>>
+        (Create kast) .down.> Recorder : <<include>>
+        (List kast)  <.right. (Update kast) : <<extend>>
+        (Update kast) <.right. (Delete kast) : <<extend>>
+        (List kast) <.left. (Publish kast) : <<extend>>
+        (Update kast)  <|-down- Editor
+        (Create kast)  <.. Editor : <<extend>>
+        Recorder  <.left. Editor : <<extend>>
+    }
+    
+    package "Manage Series" {
+        (Create series)
+        (List series) <.right. (Update series) : <<extend>>
+        (Update series) <.right. (Delete series) : <<extend>>
+    }
+
+    :Pro: -down- (Schedule)
+
+    :Creator: -down- (Create kast)
+    :Creator: -down- (Publish kast)
+    :Creator: -down- (Update kast)
+    :Creator: -down- (Delete kast)
+    :Creator: -down- (List kast)
+
+    :Creator: -up- (Create series)
+    :Creator: -up- (Update series)
+    :Creator: -up- (Delete series)
+    :Creator: -up- (List series)
+}
+
+@enduml

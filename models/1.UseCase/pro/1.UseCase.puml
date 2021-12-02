@@ -1,0 +1,55 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Pro Features" {
+    actor Creator
+    actor Pro
+
+    :Pro: <|-left- :Creator:
+
+    package "Manage Cursus" {
+        (Create cursus)
+        (Edit cursus)
+        (Delete cursus)
+        (List cursus)
+    }
+
+    package "Plan Live" {
+        (Plan live kast)
+        (Change live kast plan)
+    }
+
+    package "Lead Live" {
+        (Authorize stream)
+        (Save live kast)
+        (Stream live kast)
+    }
+
+    package "Assist Live" {
+        (Ask to stream)
+        (Watch live kast)
+        (Chat live kast)
+        (Multi-stream live kast)
+    }
+
+    :Pro: -down- (Create cursus)
+    :Pro: -down- (Edit cursus)
+    :Pro: -down- (Delete cursus)
+    :Pro: -down- (List cursus)
+
+    :Pro: -down- (Plan live kast)
+    :Pro: -down- (Change live kast plan)
+
+    :Pro: -up- (Authorize stream)
+    :Pro: -up- (Save live kast)
+    :Pro: -up- (Stream live kast)
+
+    :Creator: -up- (Chat live kast)
+    :Creator: -up- (Ask to stream)
+    :Creator: -up- (Watch live kast)
+    :Creator: -up- (Multi-stream live kast)
+}
+
+@enduml

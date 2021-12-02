@@ -1,0 +1,76 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: School Features" {
+    actor School
+    actor Student
+    actor Substitute
+    actor Register
+
+    :School: <|-right- :Substitute:
+
+    package "Manage Actor" {
+        package "Manage Student" {
+            (Create student)
+            (Edit student)
+            (Delete student)
+            (Block student)
+            (Open student)
+        }
+
+        package "Manage Substitute" as MS {
+        }
+    }
+
+    package "Manage Label" {
+        (Add label)
+        (Rename label)
+        (Delete label)
+        (Block label)
+    }
+
+    package "Use Account" {
+        (Login)
+        (Edit account)
+    }
+
+    package "Use Content" {
+        (Watch linked content)
+        (List linked content)
+    }
+
+    package "Manage Access" as MA {
+
+    }
+
+    :Student: -up- (Create student)
+    :Student: -up- (Edit student)
+    :Student: -up- (Delete student)
+    :Student: -up- (Block student)
+
+    :Student: -down- (Login)
+    :Student: -left- MA
+    :Student: -down- (Edit account)
+    :Student: -down- (Watch linked content)
+    :Student: -down- (List linked content)
+
+    :School: -down- (Create student)
+    :School: -down- (Edit student)
+    :School: -down- (Block student)
+    :School: -down- (Delete student)
+    :School: -down- (Open student)
+
+    :School: -up- (Add label)
+    :School: -up- (Rename label)
+    :School: -up- (Delete label)
+    :School: -up- (Block label)
+
+    :School: -left- MA
+    :School: -- MS
+
+    :Register: -down- MA
+}
+
+@enduml

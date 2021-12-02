@@ -1,0 +1,40 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Manage Access" {
+    actor School
+    actor Student
+    actor Register
+
+    package "Manage Access" {
+        (Use content)
+        (Request to join) <.down. (Respond to join) : <<extend>>
+        (Share content) -left- (List join request) #line:white
+        (List join request) <.left. (Open requester profile) : <<extend>>
+        (Open requester profile) <.left. (Block requester) : <<extend>>
+        (List join request) <.up. (Respond to join) : <<extend>>
+        (Open requester profile) <.up. (Respond to join) : <<extend>>
+        (Respond to join) <|-left- (Deny)
+        (Respond to join) <|-right- (Accept)
+
+        (Share content) <|-up- (Public)
+        (Share content) <|-right- (Restricted)
+        (Restricted) <|-right- (For Accepted Register)
+        (Restricted) <|-up- (For specific Label)
+        (Restricted) <|-up- (For specific Student)
+    }
+
+    :Student: -down- (Use content)
+
+    :School: -up- (Share content)
+    :School: -up- (List join request)
+    :School: -up- (Open requester profile)
+    :School: -up- (Block requester)
+
+    :Register: -down- (Request to join)
+    :Register: -down- (Use content)
+}
+
+@enduml

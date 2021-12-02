@@ -1,0 +1,32 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Manage Substitute" {
+    actor School
+    actor Substitute
+
+    note "Substitute can do\nall school use cases\nexcept critical ones." as NOTE
+    :School: <|-up- NOTE
+    NOTE -left- :Substitute:
+
+    package "Manage Substitute" {
+        (Create substitute)
+        (List substitute)
+        (Edit substitute)
+        (Delete substitute)
+        (Block substitute)
+        (Open substitute)
+    }
+
+
+    :School: -down- (Create substitute)
+    :School: -down- (List substitute)
+    :School: -down- (Edit substitute)
+    :School: -down- (Delete substitute)
+    :School: -down- (Block substitute)
+    :School: -down- (Open substitute)
+}
+
+@enduml
