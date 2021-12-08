@@ -1,0 +1,30 @@
+@startmindmap Docs
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
++ servers
+++ apis
++++ helpers
+++++ errors
+++++ events
+++++ mail
+++++ messages
++++ middlewares
+++++ guards
+++++ queue
+++++ utilities
++++ routes
++++ security
+++++ key
+++++ source
+++ config
+++ data
++++ models
++++ validations
+++ export
++++ logs
++++ temp
++++ uploads
+
+@endmindmap

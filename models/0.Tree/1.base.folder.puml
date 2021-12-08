@@ -1,0 +1,32 @@
+@startmindmap Base
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
++ base
+++ archive
++++ ...
+++ core
++++ imports
++++ modules
+++++ editor
++++++ core
++++++ interface
+++++ player
++++++ ...
+++++ recorder
++++++ ...
+++++ streamer
++++++ ...
+++++ ide
++++++ container
+++++++ java
+++++++ php
+++++++ python
+++++++ sql
++++++ ...
++++ shared
+++++ packages
+++++ types
+
+@endmindmap
