@@ -3,19 +3,21 @@ left to right direction
 skinparam shadowing false
 skinparam monochrome true
 
-frame "uc: Creator - Use Arkad" {
-    actor Creator
+frame "uc: Use IDE" {
+    actor User
 
     rectangle System {
         (Use code editor)
         (Use mini browser)
+        (Use console)
         (Use file manager)
         (Use slide)
     }
-    :Creator: -- (Use code editor)
-    :Creator: -- (Use mini browser)
-    :Creator: -- (Use file manager)
-    :Creator: -- (Use slide)
+
+    :User: -- (Use code editor)
+    :User: -- (Use mini browser)
+    :User: -- (Use file manager)
+    :User: -- (Use slide)
 }
 
 @enduml

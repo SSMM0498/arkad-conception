@@ -18,6 +18,7 @@ frame "uc: Pro Features" {
 
     package "Plan Live" {
         (Plan live kast)
+        (Cancel live kast)
         (Change live kast plan)
     }
 
@@ -40,6 +41,7 @@ frame "uc: Pro Features" {
     :Pro: -down- (List cursus)
 
     :Pro: -down- (Plan live kast)
+    :Pro: -down- (Cancel live kast)
     :Pro: -down- (Change live kast plan)
 
     :Pro: -up- (Authorize stream)

@@ -1,0 +1,28 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Use Editor" {
+    actor Creator
+
+    rectangle Editor {
+        (Insert element) <|-right- (Template)
+        (Insert element) <|-down- (Custom)
+        (Partition kast) .down.> (Extract kast) : <<extend>>
+        (Partition kast) .left.> (Chapter kast) : <<extend>>
+        (Chapter kast) .down.> (Extract kast) : <<extend>>
+
+        package "Watch" as WA {
+        }
+
+        (Partition kast) .left.> WA : <<extend>>
+    }
+
+    :Creator: -- (Partition kast)
+    :Creator: -- (Chapter kast)
+    :Creator: -- (Insert element)
+    :Creator: -- WA
+}
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Authentification" {
+    actor Registered
+    actor Visitor
+
+    rectangle System {
+        (Log in)
+        (Register)
+        (Confirm registration)
+        (Recover password)
+        (With Google)
+        (With Github)
+    }
+
+    :Registered: --> (Log in)
+    :Visitor: --> (Register)
+    :Registered: --> (Recover password)
+    (Register) ..> (Confirm registration) : << include >>
+    (Log in) .left.> (Recover password) : << extend >>
+    (Log in) <|-- (With Google)
+    (Log in) <|-- (With Github)
+}
+
+@enduml

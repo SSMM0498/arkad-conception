@@ -1,0 +1,37 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Use Player" {
+    actor Viewer
+
+    rectangle Player {
+        (Play kast)
+        (Pause kast)
+        (Go kast time)
+        (Setting kast)
+        (Comment kast)
+
+        (Pause kast) <.. UE : <<extend>>
+        (Pause kast) <.. REC : <<extend>>
+
+        package "Record" as REC {
+        }
+
+        package "Use IDE" as UE {
+        }
+
+        package "Manage Note" as MN {
+        }
+    }
+
+    :Viewer: -- MN
+    :Viewer: -- (Play kast)
+    :Viewer: -- (Pause kast)
+    :Viewer: -- (Go kast time)
+    :Viewer: -- (Setting kast)
+    :Viewer: -- (Comment kast)
+}
+
+@enduml

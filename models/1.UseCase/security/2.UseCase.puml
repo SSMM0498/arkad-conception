@@ -1,0 +1,48 @@
+@startuml Activity
+skinparam shadowing false
+skinparam monochrome true
+
+start
+    repeat :Enter login & password;
+        :Submit;
+        :Search User;
+        if (Is user login not found) then (yes)
+            :Verify password;
+            if (Is correct password) then (yes)
+                :Verify blocing;
+                if (Is user blocked) then (no)
+                    :User logged in;
+                else (no)
+                    ' backward :Signal blocking;
+                endif
+            else (no)
+                :Increment error;
+                    if (Number of connection attempts exceeded) then (no)
+                        :Show error;
+                    else (yes)
+                        :Temporairy blocked;
+                        :Notifify user;
+                        stop
+                    endif
+                stop
+            endif
+        else (no)
+            if (Number of connection attempts exceeded) then (no)
+                :Show error;
+            else (yes)
+                :Temporairy blocked;
+                :Notifify user;
+                stop
+            endif
+            stop
+        endif
+    repeat while (Something went wrong with long text?) is (yes)
+    ->no;
+    ' :Enter login & password;
+    '     :Search User;
+    '         r
+    '         ->NOK;
+    '         :Alert "Error with long text";
+    ' repeat while (Something went wrong with long text?) is (yes)
+stop
+ @enduml

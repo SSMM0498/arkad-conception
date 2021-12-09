@@ -117,4 +117,4 @@
 +   Set cursus subscribable
 +   Set cursus rentable
 +   Set cursus buyable
-
+##  MANAGE ROOM

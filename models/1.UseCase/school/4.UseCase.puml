@@ -4,14 +4,17 @@ skinparam shadowing false
 skinparam monochrome true
 
 frame "uc: Manage Access" {
-    actor School
+    actor Organizer
     actor Student
     actor Register
 
-    package "Manage Access" {
-        (Use content)
+    package "Manage Room" {
+        (Create room) -left- (Open room) #line:white
+        (Open room) -left- (Close room) #line:white
+        (Close room) -left- (List join request) #line:white
+        (Enter room)
         (Request to join) <.down. (Respond to join) : <<extend>>
-        (Share content) -right- (List join request) #line:white
+        (Share room) -right- (List join request) #line:white
         (List join request) <.left. (Open requester profile) : <<extend>>
         (Open requester profile) <.left. (Block requester) : <<extend>>
         (List join request) <.up. (Respond to join) : <<extend>>
@@ -19,22 +22,25 @@ frame "uc: Manage Access" {
         (Respond to join) <|-left- (Deny)
         (Respond to join) <|-right- (Accept)
 
-        (Share content) <|-up- (Public)
-        (Share content) <|-right- (Restricted)
+        (Share room) <|-up- (Public)
+        (Share room) <|-right- (Restricted)
         (Restricted) <|-right- (For Accepted Register)
         (Restricted) <|-up- (For specific Label)
         (Restricted) <|-up- (For specific Student)
     }
 
-    :Student: -down- (Use content)
+    :Student: -down- (Enter room)
 
-    :School: -up- (Share content)
-    :School: -up- (List join request)
-    :School: -up- (Open requester profile)
-    :School: -up- (Block requester)
+    :Organizer: -up- (Share room)
+    :Organizer: -up- (Create room)
+    :Organizer: -up-  (Open room)
+    :Organizer: -up-  (Close room)
+    :Organizer: -up- (List join request)
+    :Organizer: -up- (Open requester profile)
+    :Organizer: -up- (Block requester)
 
     :Register: -down- (Request to join)
-    :Register: -down- (Use content)
+    :Register: -down- (Enter room)
 }
 
 @enduml

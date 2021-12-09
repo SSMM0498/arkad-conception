@@ -1,0 +1,27 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome true
+
+frame "uc: Use Recorder" {
+    actor Creator
+
+    rectangle Recorder {
+        (Record kast)
+        (Stop record)
+        (Pause record)
+        (Setting record)
+
+        package "Use IDE" as UE {
+        }
+
+    }
+
+    :Creator: -- (Record kast)
+    :Creator: -- (Stop record)
+    :Creator: -- (Pause record)
+    :Creator: -- (Setting record)
+    :Creator: -- UE
+}
+
+@enduml
