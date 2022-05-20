@@ -1,4 +1,4 @@
-@startuml
+@startuml "Package diagram"
 left to right direction
 skinparam shadowing false
 skinparam monochrome reverse
@@ -6,44 +6,34 @@ skinparam monochrome reverse
 frame "pk: Different type of Profile" {
     actor Registered
     actor Pro
-    actor FreeSchool
-    actor Visitor
     actor Substitute
-    actor BusinessSchool
+    actor Visitor
     actor Admin
+    actor Student
     actor Manager
 
     Registered <|-up- Pro
-    Registered <|-left- FreeSchool #line:white
-    Pro <|-left- FreeSchool
-    FreeSchool <|-left- BusinessSchool
-    FreeSchool <|-up- Substitute
-    Visitor <|-left- Admin
-    Admin <|-left- Manager
+    Pro <|-left- Substitute
+    Visitor <|-right- Admin
+    Admin <|-right- Manager
+    Visitor <|-left- Student
 
     rectangle "Front-office" {
         ' package "Services" as SE {
-            package "Manage Cursus" as MCU {
-            }
             package "Manage Live" as MLI {
             }
-            package "Manage Account" as MAc {
+            package "Use Content" as UCO {
             }
             package "Manage Content" as MCO {
             }
             package "Manage Access" as MAC {
             }
-            package "Manage Actor" as MST {
+            package "Manage School" as MS {
             }
-            package "Use Content" as UCO {
+            package "Manage Account" as MAc {
             }
-            package "Manage Selling" as MSE {
-            }
-            MCO .right. MAc #line:white
-            MAc .left. MAC #line:white
-            MAC .left. MST #line:white
-            MCO .right.> UCO
             MLI .left.> UCO
+            MCO .right.> UCO
         ' }
 
         ' package "Security" as S {
@@ -52,17 +42,14 @@ frame "pk: Different type of Profile" {
         ' SE .left.> S
     }
 
-    :BusinessSchool: -right- MSE
     :Pro: -left- MLI
-    :Pro: -right- MCU
     :Registered: -- MAc
     :Registered: -- MCO
-    :Registered: -down- MLI #line:white;line.dashed
     :Registered: -- UCO
-    :Manager: -up- MAC #line:white;line.dashed
+    :Student: -up- MAc
     :Visitor: -left- UCO
-    :FreeSchool: -left- MAC
-    :FreeSchool: -right- MST
+    :Registered: -left- MAC
+    :Registered: -right- MS
 
     rectangle "Back-office" {
         package "Manage Manager office" as _MAN {
