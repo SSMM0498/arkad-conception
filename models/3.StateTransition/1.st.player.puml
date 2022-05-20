@@ -1,6 +1,6 @@
 @startuml "player state diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 ' frame "st: player state diagram" {
     [*] -right-> Init : arkast clicked

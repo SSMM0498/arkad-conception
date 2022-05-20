@@ -1,0 +1,98 @@
+@startuml UseCase
+left to right direction
+skinparam shadowing false
+skinparam monochrome reverse
+
+frame "pk: Different type of Profile" {
+    actor Registered
+    actor Pro
+    actor FreeSchool
+    actor Visitor
+    actor Substitute
+    actor BusinessSchool
+    actor Admin
+    actor Manager
+
+    Registered <|-up- Pro
+    Registered <|-left- FreeSchool #line:white
+    Pro <|-left- FreeSchool
+    FreeSchool <|-left- BusinessSchool
+    FreeSchool <|-up- Substitute
+    Visitor <|-left- Admin
+    Admin <|-left- Manager
+
+    rectangle "Content" as CN {
+        rectangle "Arkasts" as AR {
+
+        }
+        rectangle "Series" as SE {
+
+        }
+        rectangle "Cursus" as CU {
+
+        }
+        rectangle "Lives" as LI {
+
+        }
+    }
+
+
+
+
+    rectangle "Comments" as CO {
+
+    }
+
+    rectangle "Messages" as ME {
+
+    }
+
+    rectangle "Notes" as NO {
+
+    }
+
+    rectangle "Bookmarks" as BO {
+
+    }
+
+    rectangle "Reports" as RE {
+
+    }
+
+    rectangle "Room" as RO {
+
+    }
+
+
+    rectangle "Adds" as AD {
+
+    }
+
+    rectangle "Block" as BL {
+
+    }
+
+    Registered -left-> RE
+    Registered --> AR
+    Registered --> SE
+    Registered --> CO
+    Registered --> ME
+    Pro -up-> NO
+    Pro -right-> BO
+    Pro --> LI
+    Pro --> CU
+    FreeSchool -down-> RO
+    Admin -up-> AD
+    Admin -up-> BL
+    CN -down- BL #line:white
+    CN -down- AD #line:white
+    AR -down- Visitor #line:white
+    ' Pro --> AR
+    ' Substitute --> AR
+    ' BusinessSchool --> AR
+    ' FreeSchool --> AR
+
+
+}
+
+@enduml

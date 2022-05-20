@@ -1,6 +1,6 @@
 @startuml "transfer event sequence diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 skinparam ParticipantPadding 5
 skinparam BoxPadding 5
 autoactivate on

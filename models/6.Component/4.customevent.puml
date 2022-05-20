@@ -1,6 +1,6 @@
 @startuml "Custom Event Handling Component Diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "cp: Custom Event Handling" {
     rectangle "Recording View" {

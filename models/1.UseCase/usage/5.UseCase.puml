@@ -1,7 +1,7 @@
 @startuml UseCase
 left to right direction
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "uc: Use Player" {
     actor Viewer

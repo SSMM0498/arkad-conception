@@ -1,14 +1,16 @@
 @startuml "Recorder Component Diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "cp: Recorder" {
     [Recorder] .down.> [Listener]
-    [Recorder] .up.> [NodeEncoder]
+    [Recorder] .right.> [NodeEncoder]
     [Recorder] .down.> [WatchersHandler]
     [IframeManager] .down.> [WatchersHandler]
     [Recorder] .left.> [IframeManager]
     [WatchersHandler] .down.> [MutationBuffer]
     [MutationBuffer] .up.> [NFMHandler]
+    ' [WatchersHandler] .down.> [EventSimplifier]
+    ' [MutationBuffer] .right. [EventSimplifier] #line:white
 }
 @enduml

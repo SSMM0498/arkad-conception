@@ -1,0 +1,319 @@
+@startuml "System Class Diagram"
+skinparam shadowing false
+skinparam monochrome reverse
+
+frame "cl: System Class Diagram For Content Creation And Usage" {
+    class school {
+        id: NUMBER
+
+        name: STRING
+
+        avatar: BLOG
+        description: TEXT
+        type: SCHOOLTYPE
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class user {
+        id: NUMBER
+
+        username: STRING
+        phone: STRING
+        email: EMAIL
+        password: HASH
+
+        avatar: BLOG
+        birthDATE: DATE
+        firstname: STRING
+        lastname: STRING
+        country: STRING
+        gender: GENDER
+        bio: TEXT
+
+        github_account: STRING
+        google_account: STRING
+
+        status: Status
+        isBlocked: BOOLEAN
+        emailVerified: BOOLEAN
+        isProUser: BOOLEAN
+        role: ROLE
+
+        watching_story: BOOLEAN
+        auto_play_video: BOOLEAN
+        auto_play_next_video: BOOLEAN
+        auto_play_next_video_playlist: BOOLEAN
+
+        new_video_from_subscription: NOTIFSETTINGVALUE
+        my_video_published: NOTIFSETTINGVALUE
+        comment_mention: NOTIFSETTINGVALUE
+        new_comment_on_video: NOTIFSETTINGVALUE
+        new_follow: NOTIFSETTINGVALUE
+        abuse_state_change: NOTIFSETTINGVALUE
+        abuse_new_message: NOTIFSETTINGVALUE
+
+        last_login_at: DATE
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class authentification_token {
+        id: NUMBER
+        idUser: NUMBER
+
+        access_token: STRING
+        access_token_expires_at: DATE
+        refresh_token: STRING
+        refresh_token_expires_at: DATE
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class notification {
+        id: NUMBER
+        idUser: NUMBER
+        reference: NUMBER
+
+        type: NOTIFTYPE
+        read: BOOLEAN
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class subscription_infos {
+        id: NUMBER
+        idUser: NUMBER
+        idRank: NUMBER
+        idSchool: NUMBER
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class arkast_file {
+        id: NUMBER
+        idArkast: NUMBER
+
+        events: JSON
+        environnment: JSON
+        audio: BLOB
+    }
+
+    class tag {
+        id: NUMBER
+
+        label: STRING
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class content {
+        id: NUMBER
+        idUser: NUMBER
+        idSchool: NUMBER
+
+        thumbnail: BLOB
+        title: STRING
+        description: TEXT
+        duration: TIME
+        language: STRING
+        price: NUMBER
+
+        likes: NUMBER
+        views: NUMBER
+
+        url: STRING
+        isCursus: BOOLEAN
+        type: CONTENTTYPE
+        privacy: CONTENTPRIVACY
+        state: CONTENTSTATE
+
+        max_participant: NUMBER
+
+        originally_published_at: DATE
+        published_at: DATE
+        scheduled_for: DATE
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class message {
+        id: NUMBER
+        from: NUMBER
+
+        message: TEXT
+        timestamp: TIME
+
+        created_at: DATE
+    }
+
+    class adding_infos {
+        id: NUMBER
+        idList: NUMBER
+        idArkast: NUMBER
+
+        position: NUMBER
+
+        added_at: DATE
+        modified_at: DATE
+    }
+
+    class reading_infos {
+        id: NUMBER
+        idUser: NUMBER
+        idContent: NUMBER
+
+        isWaiting: BOOLEAN
+
+        created_at: DATE
+        modified_at: DATE
+        last_seen_at: DATE
+    }
+
+    class appreciation {
+        id: NUMBER
+        from: NUMBER
+
+        applause: NUMBER
+        current_time: TIME
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class notes {
+        id: NUMBER
+        idArkast: NUMBER
+
+        title: STRING
+        pin_at: TIME
+        payload: JSON
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class reporting_infos {
+        id: NUMBER
+        idUser: NUMBER
+        reference: NUMBER
+
+        type: REPORTTYPE
+        reason: STRING
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class rank {
+        id: NUMBER
+        idUser: NUMBER
+        idSchool: NUMBER
+
+        icon: STRING
+        label: STRING
+        subscription_fees: NUMBER
+
+        created_at: DATE
+        modified_at: DATE
+    }
+    
+    class label {
+        id: NUMBER
+        idUser: NUMBER
+        idSchool: NUMBER
+
+        label: STRING
+
+        created_at: DATE
+        modified_at: DATE
+    }
+    
+    class attach {
+        id: NUMBER
+        idUser: NUMBER
+        idLabel: NUMBER
+
+        created_at: DATE
+    }
+
+    class tagging_infos {
+        id: NUMBER
+        idContent: NUMBER
+        idTag: NUMBER
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    class comment {
+        id: NUMBER
+        idParent: NUMBER
+        from: NUMBER
+
+        content: TEXT
+
+        published_at: DATE
+        edited_at: DATE
+    }
+    
+    class payment {
+        id: NUMBER
+        idUser: NUMBER
+        for: NUMBER
+
+        paymentType: PAYMENTTYPE
+        remboursed: BOOLEAN
+
+        created_at: DATE
+        modified_at: DATE
+    }
+
+    user "0..1"-left-"1..1" authentification_token : \thave\t\t >
+    user "0..*"-down-"1..1" notification : have >
+    user "0..*"-down-"1..1" payment : have >
+
+    user "1..1"-up-"0..*" school : create >
+    user "0..*"-up-"1..1" subscription_infos : subscribe >
+    subscription_infos "1..1"-up-"0..*" school : concern >
+    rank "0..1"-down-"0..1" subscription_infos : concern >
+    rank "1..1"-down-"0..*" user : create <
+    rank "1..1"-right-"0..*" school : have <
+    
+    user "1..1"-down-"1..1" reading_infos : watch >
+    content "0..*"-down-"1..1" reading_infos : concern >
+    school "1..1"-down-"0..*" content : contain >
+    content "0..1"-right-"1..1" arkast_file: followed by <
+    reading_infos "0..*"-up-"1..1" comment : contain >
+    reading_infos "0..1"-down-"1..1" appreciation : contain >
+    reading_infos "0..*"-right-"1..1" notes : contain >
+    reading_infos "0..*"-left-"1..1" message : contain >
+    
+
+    label "1..1"-right-"0..*" school : have <
+    label "1..1"-down-"0..*" user : create <
+    label "0..*"-left-"1..1" attach : concern <
+    user "0..*"-left-"1..1" attach : is attach to >
+
+    content "0..*"-up-"1..1" tagging_infos : is tagged to >
+    tagging_infos "1..1"-right-"0..*" tag : concern >
+
+    adding_infos -up- content: follow >
+    adding_infos -down- content: follow >
+
+    reporting_infos "1..1"-left-"0..*" user : report\t\t <
+    reporting_infos "0..1"-left-"0..*" user : \n\nconcern >
+    reporting_infos "0..1"-right-"0..*" content : concern >
+    reporting_infos "0..1"-down-"0..*" comment : concern >
+    
+    arkast_file -up- tag #line:white
+    arkast_file -down- adding_infos #line:white
+    authentification_token -left- notification #line:white
+}
+
+@enduml

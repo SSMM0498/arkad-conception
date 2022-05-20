@@ -1,0 +1,17 @@
+@startuml "System Class Diagram"
+skinparam shadowing false
+skinparam monochrome reverse
+
+frame "cl: System Class Diagram For Payment" {
+    class school {
+    }
+
+    class user {
+    }
+
+    class content {
+    }
+    
+}
+
+@enduml

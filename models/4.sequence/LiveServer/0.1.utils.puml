@@ -1,6 +1,6 @@
 @startuml "Handle exceeding timeout sequence diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 autonumber
 
 activate Source

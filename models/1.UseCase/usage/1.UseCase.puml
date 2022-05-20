@@ -1,72 +1,61 @@
 @startuml UseCase
 left to right direction
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
-frame "uc: Use kast" {
+frame "uc: Use Content" {
     actor Visitor
     actor Registered
 
     Visitor <|-left- Registered
 
-    package "Appreciate Kast" {
-        (Report kast)
-        (Comment kast)
-        (Rate kast)
-        (Bookmark kast)
+    package "Appreciate content" {
+        (Report content)
+        (Comment content)
+        (Rate content)
+        (Bookmark content)
     }
 
-    package "List Kast" {
-        (List kast)
-        (Search kast)
-        (Filter kast)
+    package "Browse Content" {
+        (List content)
+        (Search content) <.down. (Filter content)
     }
 
-    package "Open Kast" as OK {
-        (Share kast)
-        (Watch kast)
-        (Use kast)
+    package "Open content" as OK {
+        (Share content)
+        (Watch content)
         (Manage note)
-        (Resume kast)
-    }
-    package "Player" {
-    }
-    package "IDE" {
-    }
-    package "Recorder" {
+        (Resume content)
+        (Open page)
     }
 
-    (Watch kast) .down.> Player : <<extend
-    Player <.down. IDE: <<extend>>
-    Recorder <.down. IDE: <<extend>>
-    Recorder <.right. Player: <<extend>>
+    package "Moteur Arkad" as MAK {
+    }
+
+    (Watch content) .down.> MAK : <<extend
+    (Resume content) .down.> MAK : <<extend
 
     package "Interact Profile" {
-        (Open author profile)
         (Subscribe author)
         (Report author)
     }
 
-    :Visitor: -up- (List kast)
-    :Visitor: -up- (Search kast)
-    :Visitor: -up- (Filter kast)
+    :Visitor: -down- (List content)
+    :Visitor: -down- (Search content)
 
-    :Visitor: -down- (Watch kast)
-    :Visitor: -down- (Use kast)
-    :Registered: -down- (Resume kast)
-    :Registered: -right- (Create kast)
-    (Create kast) -right- Recorder
+    :Visitor: -down- (Watch content)
+    :Registered: -down- (Resume content)
 
-    :Visitor: -down- (Open author profile)
-    :Registered: -up- (Subscribe author)
-    :Registered: -up- (Report author)
+    :Visitor: -down- (Open page)
+    :Registered: -down- (Subscribe author)
+    :Registered: -down- (Report author)
 
-    :Visitor: -up- (Share kast)
-    :Registered: -up- (Bookmark kast)
-    :Registered: -up- (Manage note)
-    :Registered: -up- (Report kast)
-    :Registered: -up- (Comment kast)
-    :Registered: -up- (Rate kast)
+    :Visitor: -down- (Share content)
+    :Registered: -down- (Bookmark content)
+    :Registered: -down- (Manage note)
+    :Registered: -down- (Report content)
+    :Registered: -down- (Comment content)
+    :Registered: -down- (Rate content)
 }
 
 @enduml

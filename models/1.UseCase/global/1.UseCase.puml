@@ -1,7 +1,7 @@
-@startuml UseCase
+@startuml
 left to right direction
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "pk: Different type of Profile" {
     actor Registered
@@ -22,9 +22,7 @@ frame "pk: Different type of Profile" {
     Admin <|-left- Manager
 
     rectangle "Front-office" {
-        package "Services" as SE {
-            package "Manage Cursus" as MCU {
-            }
+        ' package "Services" as SE {
             package "Manage Cursus" as MCU {
             }
             package "Manage Live" as MLI {
@@ -35,29 +33,23 @@ frame "pk: Different type of Profile" {
             }
             package "Manage Access" as MAC {
             }
-            package "Manage Actors" as MST {
+            package "Manage Actor" as MST {
             }
             package "Use Content" as UCO {
             }
             package "Manage Selling" as MSE {
             }
-            package "Manage Room" as MR {
-            }
-
-            MCU .left. MLI #line:white
-            MST .left. MSE #line:white
-            MCU .left. MLI #line:white
-            MCO .left. MAc #line:white
+            MCO .right. MAc #line:white
             MAc .left. MAC #line:white
             MAC .left. MST #line:white
             MCO .right.> UCO
             MLI .left.> UCO
-        }
+        ' }
 
-        package "Security" as S {
-        }
+        ' package "Security" as S {
+        ' }
 
-        SE .left.> S
+        ' SE .left.> S
     }
 
     :BusinessSchool: -right- MSE
@@ -65,13 +57,12 @@ frame "pk: Different type of Profile" {
     :Pro: -right- MCU
     :Registered: -- MAc
     :Registered: -- MCO
+    :Registered: -down- MLI #line:white;line.dashed
     :Registered: -- UCO
-    ' :Visitor: -up- S #line:white;line.dashed
-    :Visitor: -up- MLI #line:white;line.dashed
+    :Manager: -up- MAC #line:white;line.dashed
     :Visitor: -left- UCO
     :FreeSchool: -left- MAC
     :FreeSchool: -right- MST
-    :FreeSchool: -right- MR
 
     rectangle "Back-office" {
         package "Manage Manager office" as _MAN {
@@ -90,17 +81,12 @@ frame "pk: Different type of Profile" {
         }
         package "Manage App" as _MAP {
         }
-        package "Setting App" as _SAP {
-        }
-        package "Manage Architecture" as _MAR {
-        }
-        _MAP <|-down- _SAP
-        _MAP <|-down- _MAR
-        _MR <|-right- _MC
+
+        _MR <|-right- _MC #line:white
         _MU .down.> _MR
         _MA .down.> _MR
         _MAD .down.> _MR
-        _MB .down.> _MR
+        _MB .down.> _MC
     }
 
     ' _SAP -- S
@@ -111,5 +97,4 @@ frame "pk: Different type of Profile" {
     :Admin: -down- _MAD
     :Admin: -down- _MB
 }
-
 @enduml

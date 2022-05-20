@@ -1,6 +1,6 @@
 @startuml "unsubscription sequence diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 autoactivate on
 autonumber
 activate Client

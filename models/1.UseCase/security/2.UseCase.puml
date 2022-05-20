@@ -1,6 +1,6 @@
 @startuml Activity
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 start
     repeat :Enter login & password;

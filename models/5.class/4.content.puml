@@ -1,0 +1,158 @@
+@startuml "Content Management Class Diagram"
+skinparam shadowing false
+skinparam monochrome reverse
+
+frame "cl: Content Management Class Diagram" {
+    enum Status {
+        online
+        disconnected
+    }
+
+    rectangle "User" {
+        class user {
+            **id: NUMBER**
+
+            **username: STRING**
+            **email: EMAIL**
+            **password: HASH**
+
+            ---
+
+            avatar: BLOG
+            **firstname: STRING**
+            **lastname: STRING**
+            bio: TEXT
+            
+            ---
+
+            githubcount: STRING
+            googlecount: STRING
+
+            ---
+
+            status: Status
+            workspacehash: STRING
+            
+            ---
+
+            created_at: DATE
+            modified_at: DATE
+
+        }
+    }
+
+    rectangle "Arkast creation" {
+        class arkast {
+            **id: NUMBER**
+            **title: STRING**
+            **description: TEXT**
+            **duration: TIME**
+            **likes: NUMBER**
+            **views: NUMBER**
+            published_at: DATE
+            modified_at: DATE
+        }
+
+        class arkast_file {
+            **id: NUMBER**
+            **events: JSON**
+            **environnment: JSON**
+            audio: BLOB
+        }
+
+        class creating_infos {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            **idArkast: NUMBER**
+            created_at: TIME
+        }
+    }
+
+    rectangle "Live" {
+        class livekast {
+            **id: NUMBER**
+            from: NUMBER
+            created_at: DATE
+        }
+        
+        class wait {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            **idLive: NUMBER**
+            created_at: DATE
+        }
+
+        class schedule {
+            **id: NUMBER**
+            **idLive: NUMBER**
+            **scheduledFor: DATE**
+            title: STRING
+            created_at: DATE
+            updated_at: DATE
+        }
+
+        class message {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            **idLivekast: NUMBER**
+            message: TEXT
+            timestamp: TIME
+        }
+
+    }
+
+    rectangle "Arkast Listing"{
+        class arkastseries {
+            **id: NUMBER**
+            idUser: NUMBER
+            title: STRING
+            arkasts: LISTARKAST
+            published_at: DATE
+            modified_at: DATE
+        }
+
+        class adding_infos {
+            **id: NUMBER**
+            index: NUMBER
+            added_at: DATE
+            modified_at: DATE
+        }
+    }
+    
+    rectangle "Cursus"{
+        class arkastcursus {
+            **id: NUMBER**
+            idUser: NUMBER
+            title: STRING
+            arkasts: LISTARKAST
+            published_at: DATE
+            modified_at: DATE
+        }
+
+        class _adding_infos {
+            **id: NUMBER**
+            index: NUMBER
+            added_at: DATE
+            modified_at: DATE
+        }
+    }
+
+    user -up- arkastcursus : manage >
+    user -down- arkastseries : manage >
+    user -left- creating_infos : create >
+    user -down- wait : wait >
+    user -left- livekast : organise >
+    user -left- message : send >
+
+    livekast -up- message : contains <
+    livekast -right- schedule : organise >
+    livekast -down- wait : organise >
+    arkast -left- arkast_file : contain >
+    creating_infos -left- arkast : contains <
+    adding_infos -left- arkastseries : have <
+    _adding_infos -left- arkastcursus : have <
+    adding_infos -up- arkast : mention in <
+    _adding_infos -down- arkast : mention in <
+}
+
+@enduml

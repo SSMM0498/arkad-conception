@@ -1,7 +1,7 @@
 @startuml UseCase
 left to right direction
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "uc: Manage Account" {
     actor Creator
@@ -10,28 +10,14 @@ frame "uc: Manage Account" {
     Creator <|-left- Pro
 
     package "Manage Account" {
-        (Edit account) <.left. (Upgrade account) : <<extend>>
-        (Edit account) <.. (Delete account) : <<extend>>
-        (Edit account) <|-down- (Pro Profile)
-        (Edit account) <|-down- (School Profile)
-        (Edit account) <|-down- (Business Profile)
-    }
-    
-    package "Analytics" {
-        (View Watched time)
-        (View Most viewed)
-        (View Top video)
-        (View Subscriptions)
-        (View Sales reports)
+        (View Analytics)
+        (Edit account) <.right. (Upgrade account) : <<extend>>
+        (Edit account) <.left. (Delete account) : <<extend>>
     }
 
     package "Manage Payment" {
-        (Add billing method) -left- (Open billing method) #line:white
-        (Open billing method) -left- (Change billing method) #line:white
-        (Change billing method) -left- (Delete billing method) #line:white
+        (Define billing method) -left- (Delete billing method) #line:white
         (Delete billing method) -left- (View billings) #line:white
-        (View billings) <|-up- (Charts)
-        (View billings) <|-up- (Lists)
     }
 
     package "Manage Note" {
@@ -39,25 +25,19 @@ frame "uc: Manage Account" {
         (Open note) -left- (Rename note) #line:white
     }
 
-    :Pro: -up- (Open note)
-    :Pro: -up- (Delete note)
-    :Pro: -up- (Rename note)
-
-    :Pro: -up- (Add billing method)
-    :Pro: -up- (Open billing method)
-    :Pro: -up- (Change billing method)
-    :Pro: -up- (Delete billing method)
-    :Pro: -up- (View billings)
-
-    :Pro: -down- (View Watched time)
-    :Pro: -down- (View Most viewed)
-    :Pro: -down- (View Top video)
-    :Pro: -down- (View Subscriptions)
-    :Pro: -down- (View Sales reports)
-
     :Creator: -down- (Edit account)
     :Creator: -down- (Delete account)
     :Creator: -down- (Upgrade account)
+
+    :Pro: -down- (View Analytics)
+
+    :Pro: -down- (Open note)
+    :Pro: -down- (Delete note)
+    :Pro: -down- (Rename note)
+
+    :Pro: -down- (Define billing method)
+    :Pro: -down- (Delete billing method)
+    :Pro: -down- (View billings)
 }
 
 @enduml

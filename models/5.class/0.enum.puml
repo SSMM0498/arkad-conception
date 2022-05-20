@@ -1,0 +1,67 @@
+@startuml "System Class Diagram"
+skinparam shadowing false
+skinparam monochrome reverse
+
+frame "cl: All Enumeration Class Diagram" {
+    enum GENDER {
+        MALE
+        FEMALE
+    }
+
+    enum Role {
+        BUSINESS
+        STUDENT
+        SUPPLEANT
+    }
+
+    enum NOTIFSETTINGVALUE {
+        NONE
+        WEB
+        EMAIL
+    }
+
+    enum NOTIFTYPE {
+        NEW_VIDEO_FROM_SUBSCRIPTION
+        MY_VIDEO_PUBLISHED
+        COMMENT_MENTION
+        NEW_COMMENT_ON_VIDEO
+        NEW_FOLLOW
+        ABUSE_STATE_CHANGE
+        ABUSE_NEW_MESSAGE
+    }
+
+    enum CONTENTPRIVACY {
+        PUBLIC
+        SUBSCRIBER
+        UNLISTED
+        PRIVATE
+    }
+
+    enum CONTENTTYPE {
+        LIST
+        KAST
+        LIVE
+    }
+    
+    enum REPORTTYPE {
+        CONTENT
+        COMMENT
+        PROFILE
+    }
+    
+    enum PAYMENTTYPE {
+        SUBSCRIPTION
+        PURCHASEMENT
+    }
+
+    enum CONTENTSTATE {
+        PUBLISHED
+        TO_TRANSCODE
+        WAITING_FOR_LIVE
+        LIVE_ENDED
+        TRANSCODING_FAILED
+        BLOCKED
+    }
+}
+
+@enduml

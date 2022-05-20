@@ -1,6 +1,6 @@
 @startuml "Interaction Package Component Diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "cp: Interaction Package" {
     actor "Watcher" as W

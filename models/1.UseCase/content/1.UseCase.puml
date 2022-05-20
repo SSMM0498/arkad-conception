@@ -1,7 +1,7 @@
-@startuml UseCase
+@startuml
 left to right direction
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "uc: Manage Basics Contents" {
     actor Creator
@@ -9,45 +9,44 @@ frame "uc: Manage Basics Contents" {
 
     Creator <|-left- Pro
 
-    package "Recorder" {
+    package "Moteur ARKAD" as MAK {
     }
-    package "Editor" {
-    }
-    package "IDE" {
-    }
-
-    Recorder <.down. IDE: <<extend>>
 
     package "Manage Arkast " {
         (Create kast)
-        (Publish kast) <|-left- (Schedule) : <<extend>>
-        (Create kast) .down.> Recorder : <<include>>
-        (List kast)  <.right. (Update kast) : <<extend>>
-        (Update kast) <.right. (Delete kast) : <<extend>>
-        (List kast) <.left. (Publish kast) : <<extend>>
-        (Update kast)  <|-down- Editor
-        (Create kast)  <.. Editor : <<extend>>
-        Recorder  <.left. Editor : <<extend>>
+        (Publish kast) <.left. (Schedule) : <<extend>>
+        (List kast)
+        (Update kast) <.left. (Delete kast) : <<extend>>
+        (Update kast)  <.down. MAK
+        (Create kast)  <.. MAK : <<extend>>
     }
     
     package "Manage Series" {
         (Create series)
-        (List series) <.right. (Update series) : <<extend>>
-        (Update series) <.right. (Delete series) : <<extend>>
+        (List series)
+        (Update series) <.down. (Delete series) : <<extend>>
+    }
+
+    package "Manage Cursus" {
+        (Create cursus)
+        (Edit cursus) <.down. (Delete cursus) : <<extend>>
+        (List cursus)
     }
 
     :Pro: -down- (Schedule)
+    :Pro: .down. (Publish kast) #line:white
+
+    :Pro: -down- (Create cursus)
+    :Pro: -down- (Edit cursus)
+    :Pro: -down- (List cursus)
 
     :Creator: -down- (Create kast)
     :Creator: -down- (Publish kast)
     :Creator: -down- (Update kast)
-    :Creator: -down- (Delete kast)
     :Creator: -down- (List kast)
 
-    :Creator: -up- (Create series)
-    :Creator: -up- (Update series)
-    :Creator: -up- (Delete series)
-    :Creator: -up- (List series)
+    :Creator: -down- (Create series)
+    :Creator: -down- (Update series)
+    :Creator: -down- (List series)
 }
-
 @enduml

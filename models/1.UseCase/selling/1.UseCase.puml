@@ -1,41 +1,64 @@
-@startuml UseCase
+@startuml "School Features"
 left to right direction
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
-frame "uc: Manage Selling" {
+frame "uc: School Features" {
+    actor School
     actor BusinessSchool
-    actor Registered
+    actor Substitute
+    actor Register
+
+    note "Substitute can do\nall school use cases\nexcept critical ones." as NOTE
+    :School: <|-up- NOTE
+    NOTE -left- :Substitute:
+    :School: <|-left- :BusinessSchool:
+    :School: <|-right- :Register:
+
+    package "Manage Actor" {
+            (Create Actor) <|-down- (Student)
+            (Create Actor) <|-down- ( Substitute)
+            (Edit Actor)
+            (Delete Actor)
+            (Block Actor)
+            (Open Actor)
+    }
 
     package "Manage Selling" as MSE {
-        (Sell content) <|-left- (Subscribable)
-        (Sell content) <|-down- (Rentable)
-        (Sell content) <|-down- (Buyable)
+        (Sell content)
+        (Define rank)
         (View sales report)
     }
 
-    package "Use Content" as UCO {
-        (Buy content)
-        (Subscribe content)
-        (Rent content)
+    package "Manage Access" as MA {
+        (Request access)
+        (Set access) <|-left- (For Accepted Register)
+        (Set access) <|-down- (For specific Label)
+        (Set access) <|-down- (For specific Student)
+        (Deny access) <.down. (Block requester) : <<extend>>
+        (Accept access)
     }
 
-    (Buyable) .down.> (Buy content) : <<extend>>
-    (Subscribable) .down.> (Subscribe content) : <<extend>>
-    (Rentable) .down.> (Rent content) : <<extend>>
+    package "Purchase" as UCO {
+        (Buy content)
+        (Subscribe rank)
+    }
 
-    :Registered: -up- (Buy content)
-    :Registered: -up- (Subscribe content)
-    :Registered: -up-  (Rent content)
+    :School: -down- (Create Actor)
+    :School: -down- (Edit Actor)
+    :School: -down- (Block Actor)
+    :School: -down- (Delete Actor)
+    :School: -down- (Open Actor)
+    :School: -down- (Set access)
+    :School: -down- (Accept access)
+    :School: -down- (Deny access)
+
+    :Register: -down- (Request access)
+    :Register: -down- (Buy content)
+    :Register: -down- (Subscribe rank)
 
     :BusinessSchool: -down- (Sell content)
+    :BusinessSchool: -down- (Define rank)
     :BusinessSchool: -left- (View sales report)
-    ' :School: -up- (List join request)
-    ' :School: -up- (Open requester profile)
-    ' :School: -up- (Block requester)
-
-    ' :Register: -down- (Request to join)
-    ' :Register: -down- (Use content)
 }
-
 @enduml

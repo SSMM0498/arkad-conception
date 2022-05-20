@@ -1,0 +1,120 @@
+@startuml "Content Usage Class Diagram"
+skinparam shadowing false
+skinparam monochrome reverse
+
+
+frame "cl: Content Usage Class Diagram" {
+    class user {
+        \n
+    }
+
+    rectangle "Content" {
+        class content {
+            \n
+        }
+
+        class bookmarked {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            idArkast: NUMBER
+            like: BOOLEAN
+            resume_time: TIME
+        }
+
+        class blocked {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            idArkast: NUMBER
+            like: BOOLEAN
+            resume_time: TIME
+        }
+    }
+
+    rectangle "Arkast Viewing" {
+        class arkast {
+            \n
+        }
+
+        class _blocked {
+            \n
+        }
+
+        class reading_infos {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            idArkast: NUMBER
+            like: BOOLEAN
+            resume_time: TIME
+        }
+
+        class notes {
+            **id: NUMBER**
+            idArkast: NUMBER
+            title: STRING
+            pin_at: TIME
+            created_at: DATE
+            modified_at: DATE
+            payload: JSON
+        }
+
+        class comment {
+            **id: NUMBER**
+            nestedIn: NUMBER
+            form: NUMBER
+            content: TEXT
+            published_at: DATE
+        }
+    }
+
+    rectangle "Live" {
+        class livekast {
+            \n
+        }
+
+        class wait {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            **idLive: NUMBER**
+            created_at: DATE
+        }
+
+        class seeing_infos {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            idLivekast: NUMBER
+            resume_time: TIME
+        }
+
+        class message {
+            **id: NUMBER**
+            **idUser: NUMBER**
+            **idLivekast: NUMBER**
+            message: TEXT
+            timestamp: TIME
+        }
+
+    }
+
+    user -down- reading_infos : watch >
+    user -down- comment : organise >
+    user -down- _blocked : organise >
+    user -right- blocked : create >
+    user -right- bookmarked : create >
+    user -up- message : send >
+    user -up- wait : wait >
+    user -up- seeing_infos : organise >
+
+    reading_infos -left- comment : contain >
+    reading_infos -down- notes : contain >
+    content -left- blocked : mention >
+    content -left- bookmarked : mention >
+    blocked -down- bookmarked #line:white
+    comment -left- _blocked : contain >
+
+    livekast -down- message : contains <
+    livekast -down- wait : organise >
+    livekast -down- seeing_infos : organise >
+    arkast -up- reading_infos : contain >
+}
+
+@enduml

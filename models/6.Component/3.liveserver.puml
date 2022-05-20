@@ -1,6 +1,6 @@
 @startuml "Live Server Component Diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "cp: Live Server" {
     rectangle "Viewer Side"{
@@ -9,9 +9,9 @@ frame "cp: Live Server" {
         [Scheduler] -right-> [Player]
     }
     rectangle "Streamer Side"{
-        [Bufferizer] -up-> [S-Emitter]
-        [Bufferizer] -down-> [S-Listerner]
-        [Bufferizer] -left-> [Recorder]
+        [Buffer] -up-> [S-Emitter]
+        [Buffer] -down-> [S-Listerner]
+        [Buffer] -left-> [Recorder]
     }
 
     [C-Listerner] <.left. [S-Emitter]

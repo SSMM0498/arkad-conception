@@ -1,76 +1,64 @@
-@startuml UseCase
+@startuml
 left to right direction
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 frame "uc: School Features" {
     actor School
-    actor Student
+    actor BusinessSchool
     actor Substitute
     actor Register
 
-    :School: <|-right- :Substitute:
+    note "Substitute can do\nall school use cases\nexcept critical ones." as NOTE
+    :School: <|-up- NOTE
+    NOTE -left- :Substitute:
+    :School: <|-left- :BusinessSchool:
+    :School: <|-right- :Register:
 
     package "Manage Actor" {
-        package "Manage Student" {
-            (Create student)
-            (Edit student)
-            (Delete student)
-            (Block student)
-            (Open student)
-        }
-
-        package "Manage Substitute" as MS {
-        }
+            (Create Actor) <|-down- (Student)
+            (Create Actor) <|-down- ( Substitute)
+            (Edit Actor)
+            (Delete Actor)
+            (Block Actor)
+            (Open Actor)
     }
 
-    package "Manage Label" {
-        (Add label)
-        (Rename label)
-        (Delete label)
-        (Block label)
-    }
-
-    package "Use Account" {
-        (Login)
-        (Edit account)
-    }
-
-    package "Use Content" {
-        (Watch linked content)
-        (List linked content)
+    package "Manage Selling" as MSE {
+        (Sell content)
+        (Define rank)
+        (View sales report)
     }
 
     package "Manage Access" as MA {
-
+        (Request access)
+        (Restrict usage) <|-left- (For Accepted Register)
+        (Restrict usage) <|-down- (For specific Label)
+        (Restrict usage) <|-down- (For specific Student)
+        (Deny access) <.down. (Block requester) : <<extend>>
+        (Accept access)
     }
 
-    :Student: -up- (Create student)
-    :Student: -up- (Edit student)
-    :Student: -up- (Delete student)
-    :Student: -up- (Block student)
+    package "Purchase" as UCO {
+        (Buy content)
+        (Subscribe rank)
+    }
 
-    :Student: -down- (Login)
-    :Student: -left- MA
-    :Student: -down- (Edit account)
-    :Student: -down- (Watch linked content)
-    :Student: -down- (List linked content)
+    :School: -down- (Create Actor)
+    :School: -down- (Edit Actor)
+    :School: -down- (Block Actor)
+    :School: -down- (Delete Actor)
+    :School: -down- (Open Actor)
+    :School: -down- (Restrict usage)
+    :School: -down- (Accept access)
+    :School: -down- (Deny access)
 
-    :School: -down- (Create student)
-    :School: -down- (Edit student)
-    :School: -down- (Block student)
-    :School: -down- (Delete student)
-    :School: -down- (Open student)
+    :Register: -down- (Request access)
+    :Register: -down- (Buy content)
+    :Register: -down- (Subscribe rank)
 
-    :School: -up- (Add label)
-    :School: -up- (Rename label)
-    :School: -up- (Delete label)
-    :School: -up- (Block label)
-
-    :School: -left- MA
-    :School: -- MS
-
-    :Register: -down- MA
+    :BusinessSchool: -down- (Sell content)
+    :BusinessSchool: -down- (Define rank)
+    :BusinessSchool: -left- (View sales report)
 }
-
 @enduml

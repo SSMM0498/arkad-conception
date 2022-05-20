@@ -1,6 +1,6 @@
 @startuml "recorder state diagram"
 skinparam shadowing false
-skinparam monochrome true
+skinparam monochrome reverse
 
 ' frame "st: recorder state diagram" {
     [*] --> Ready : arkast clicked
