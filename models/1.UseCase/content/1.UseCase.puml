@@ -3,7 +3,7 @@ left to right direction
 skinparam shadowing false
 skinparam monochrome reverse
 
-frame "uc: Manage Basics Contents" {
+frame "uc: Manage Contents" {
     actor Creator
     actor Pro
 
@@ -14,39 +14,32 @@ frame "uc: Manage Basics Contents" {
 
     package "Manage Arkast " {
         (Create kast)
-        (Publish kast) <.left. (Schedule) : <<extend>>
+        (Publish kast) <.right. (Schedule) : <<extend>>
         (List kast)
+        (Publish kast) .right.> (Set visibility) : <<include>>
+        (Set price)
         (Update kast) <.left. (Delete kast) : <<extend>>
         (Update kast)  <.down. MAK
         (Create kast)  <.. MAK : <<extend>>
     }
     
-    package "Manage Series" {
-        (Create series)
-        (List series)
-        (Update series) <.down. (Delete series) : <<extend>>
-    }
-
-    package "Manage Cursus" {
-        (Create cursus)
-        (Edit cursus) <.down. (Delete cursus) : <<extend>>
-        (List cursus)
+    package "Manage List" {
+        (Create List) <|-down- (Simple)
+        (Create List) <|-down- (Cursus)
+        (List List)
+        (Update List) <.down. (Delete List) : <<extend>>
     }
 
     :Pro: -down- (Schedule)
-    :Pro: .down. (Publish kast) #line:white
-
-    :Pro: -down- (Create cursus)
-    :Pro: -down- (Edit cursus)
-    :Pro: -down- (List cursus)
+    :Pro: -down- (Set price)
 
     :Creator: -down- (Create kast)
     :Creator: -down- (Publish kast)
     :Creator: -down- (Update kast)
     :Creator: -down- (List kast)
 
-    :Creator: -down- (Create series)
-    :Creator: -down- (Update series)
-    :Creator: -down- (List series)
+    :Creator: -down- (Create List)
+    :Creator: -down- (Update List)
+    :Creator: -down- (List List)
 }
 @enduml

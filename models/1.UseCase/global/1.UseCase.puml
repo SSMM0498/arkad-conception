@@ -26,8 +26,6 @@ frame "pk: Different type of Profile" {
             }
             package "Manage Content" as MCO {
             }
-            package "Manage Access" as MAC {
-            }
             package "Manage School" as MS {
             }
             package "Manage Account" as MAc {
@@ -48,7 +46,6 @@ frame "pk: Different type of Profile" {
     :Registered: -- UCO
     :Student: -up- MAc
     :Visitor: -left- UCO
-    :Registered: -left- MAC
     :Registered: -right- MS
 
     rectangle "Back-office" {

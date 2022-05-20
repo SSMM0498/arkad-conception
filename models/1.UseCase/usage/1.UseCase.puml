@@ -23,17 +23,15 @@ frame "uc: Use Content" {
 
     package "Open content" as OK {
         (Share content)
+        (Resume content)
         (Watch content)
         (Manage note)
-        (Resume content)
-        (Open page)
     }
 
     package "Moteur Arkad" as MAK {
     }
 
     (Watch content) .down.> MAK : <<extend
-    (Resume content) .down.> MAK : <<extend
 
     package "Interact Profile" {
         (Subscribe author)
@@ -43,16 +41,15 @@ frame "uc: Use Content" {
     :Visitor: -down- (List content)
     :Visitor: -down- (Search content)
 
-    :Visitor: -down- (Watch content)
+    :Visitor: -down- (Share content)
     :Registered: -down- (Resume content)
+    :Registered: -down- (Manage note)
 
-    :Visitor: -down- (Open page)
     :Registered: -down- (Subscribe author)
     :Registered: -down- (Report author)
 
-    :Visitor: -down- (Share content)
+    :Visitor: -down- (Watch content)
     :Registered: -down- (Bookmark content)
-    :Registered: -down- (Manage note)
     :Registered: -down- (Report content)
     :Registered: -down- (Comment content)
     :Registered: -down- (Rate content)

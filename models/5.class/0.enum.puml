@@ -33,6 +33,8 @@ frame "cl: All Enumeration Class Diagram" {
     enum CONTENTPRIVACY {
         PUBLIC
         SUBSCRIBER
+        ONLYSTUDENT
+        ONLYLABEL
         UNLISTED
         PRIVATE
     }

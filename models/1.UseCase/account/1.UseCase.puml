@@ -4,13 +4,13 @@ skinparam shadowing false
 skinparam monochrome reverse
 
 frame "uc: Manage Account" {
-    actor Creator
+    actor Register
     actor Pro
 
-    Creator <|-left- Pro
+    Register <|-left- Pro
 
     package "Manage Account" {
-        (View Analytics)
+        (List bookmarks)
         (Edit account) <.right. (Upgrade account) : <<extend>>
         (Edit account) <.left. (Delete account) : <<extend>>
     }
@@ -25,11 +25,12 @@ frame "uc: Manage Account" {
         (Open note) -left- (Rename note) #line:white
     }
 
-    :Creator: -down- (Edit account)
-    :Creator: -down- (Delete account)
-    :Creator: -down- (Upgrade account)
+    :Register: -down- (Edit account)
+    :Register: -down- (Delete account)
+    :Register: -down- (Upgrade account)
+    :Register: -down- (List bookmarks)
 
-    :Pro: -down- (View Analytics)
+    :Pro: .down. (List bookmarks) #line:white
 
     :Pro: -down- (Open note)
     :Pro: -down- (Delete note)

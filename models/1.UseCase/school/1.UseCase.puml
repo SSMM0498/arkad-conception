@@ -4,61 +4,48 @@ skinparam shadowing false
 skinparam monochrome reverse
 
 frame "uc: School Features" {
-    actor School
-    actor BusinessSchool
+    actor Register
     actor Substitute
     actor Register
 
-    note "Substitute can do\nall school use cases\nexcept critical ones." as NOTE
-    :School: <|-up- NOTE
+    note "Substitute can do\nall Register use cases\nexcept critical ones." as NOTE
+    :Register: <|-up- NOTE
     NOTE -left- :Substitute:
-    :School: <|-left- :BusinessSchool:
-    :School: <|-right- :Register:
 
     package "Manage Actor" {
-            (Create Actor) <|-down- (Student)
-            (Create Actor) <|-down- ( Substitute)
-            (Edit Actor)
-            (Delete Actor)
-            (Block Actor)
-            (Open Actor)
+        (Create Actor) <|-down- (Student)
+        (Create Actor) <|-down- ( Substitute)
+        (Edit Actor) <.down. (Block Actor) : <<extend>>
+        (List Actor)
+        (Delete Actor)
+        (Open Actor)
     }
 
-    package "Manage Selling" as MSE {
-        (Sell content)
+    package "Manage School" {
+        (View Analytics)
+        (Create School) <|-down- (FreeSchool)
+        (Create School) <|-down- (BusinessSchool)
+        (List School)
+        (Edit School) <.down. (Block School) : <<extend>>
+        (Delete School)
+        (Subscribe School) <|-down- (Rank)
+        (Subscribe School) <|-down- (Free)
         (Define rank)
-        (View sales report)
     }
 
-    package "Manage Access" as MA {
-        (Request access)
-        (Restrict usage) <|-left- (For Accepted Register)
-        (Restrict usage) <|-down- (For specific Label)
-        (Restrict usage) <|-down- (For specific Student)
-        (Deny access) <.down. (Block requester) : <<extend>>
-        (Accept access)
-    }
+    :Register: -down- (Create Actor)
+    :Register: -down- (Edit Actor)
+    :Register: -down- (List Actor)
+    :Register: -down- (Delete Actor)
+    :Register: -down- (Open Actor)
 
-    package "Purchase" as UCO {
-        (Buy content)
-        (Subscribe rank)
-    }
+    :Register: -down- (Create School)
+    :Register: -down- (Edit School)
+    :Register: -down- (List School)
+    :Register: -down- (Delete School)
+    :Register: -down- (View Analytics)
+    :Register: -down- (Subscribe School)
+    :Register: -down- (Define rank)
 
-    :School: -down- (Create Actor)
-    :School: -down- (Edit Actor)
-    :School: -down- (Block Actor)
-    :School: -down- (Delete Actor)
-    :School: -down- (Open Actor)
-    :School: -down- (Restrict usage)
-    :School: -down- (Accept access)
-    :School: -down- (Deny access)
-
-    :Register: -down- (Request access)
-    :Register: -down- (Buy content)
-    :Register: -down- (Subscribe rank)
-
-    :BusinessSchool: -down- (Sell content)
-    :BusinessSchool: -down- (Define rank)
-    :BusinessSchool: -left- (View sales report)
 }
 @enduml
