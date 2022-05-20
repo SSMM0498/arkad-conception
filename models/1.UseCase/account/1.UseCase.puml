@@ -11,13 +11,9 @@ frame "uc: Manage Account" {
 
     package "Manage Account" {
         (List bookmarks)
-        (Edit account) <.right. (Upgrade account) : <<extend>>
-        (Edit account) <.left. (Delete account) : <<extend>>
-    }
-
-    package "Manage Payment" {
-        (Define billing method) -left- (Delete billing method) #line:white
-        (Delete billing method) -left- (View billings) #line:white
+        (Edit account) <.down. (Upgrade account) : <<extend>>
+        (Edit account) <.right. (Delete account) : <<extend>>
+        (View billings)
     }
 
     package "Manage Note" {
@@ -26,8 +22,6 @@ frame "uc: Manage Account" {
     }
 
     :Register: -down- (Edit account)
-    :Register: -down- (Delete account)
-    :Register: -down- (Upgrade account)
     :Register: -down- (List bookmarks)
 
     :Pro: .down. (List bookmarks) #line:white
@@ -36,8 +30,6 @@ frame "uc: Manage Account" {
     :Pro: -down- (Delete note)
     :Pro: -down- (Rename note)
 
-    :Pro: -down- (Define billing method)
-    :Pro: -down- (Delete billing method)
     :Pro: -down- (View billings)
 }
 

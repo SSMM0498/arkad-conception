@@ -169,6 +169,7 @@ frame "cl: System Class Diagram For Content Creation And Usage" {
         idContent: NUMBER
 
         isWaiting: BOOLEAN
+        isBookmarked: BOOLEAN
 
         created_at: DATE
         modified_at: DATE
